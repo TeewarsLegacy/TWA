@@ -12,7 +12,7 @@
 
 #include "map.h"
 
-void server_main(){
+void ServerMain(){
 	Map object;
 	LoadMap(&object, "dm1");
 }

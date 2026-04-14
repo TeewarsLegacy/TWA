@@ -25,7 +25,7 @@ MenuCore *Menu;
 
 Mix_Music *Music;
 
-void client_main(){
+void ClientMain(){
 	// Initialization of objects
 	Game = new GameCore(); 
 	Menu = new MenuCore(); 
