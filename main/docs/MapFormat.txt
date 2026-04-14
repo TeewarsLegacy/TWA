@@ -1,0 +1,35 @@
+MAP FORMAT
+------------
+Teewars Legacy map format is .TWLM (TeeWars Legacy Map)
+------------
+SYNTAX
+------------
+Here is samples of TWLM syntax:
+
+; <Your text> - This is code tip
+
+object <Object name> - Adding object in map
+
+point - Adding vertex on map
+
+break - Stop draw polygon with vertex, and switching to another
+
+Also, important info:
+After object and point keyword you have to write position with 'x' and 'y' keyword.
+For example:
+point
+x 1
+y 2
+------------
+OBJECTS
+------------
+SPAWN - Players spawn point
+WEAPON_GUN - Gun spawn point
+WEAPON_SHOTGUN - Shotgun spawn point
+WEAPON_GRENADE - Grenade spawn point
+ARMOR_1 - Armor giver (and it gives 1 armor point)
+ARMOR_5 - Armor giver (and it gives 5 armor points)
+ARMOR_10 - Armor giver (and it gives 10 armor points)
+HEALTH_1 - Health giver (and it gives 1 health point)
+HEALTH_5 - Health giver (and it gives 5 health points)
+HEALTH_10 - Health giver (and it gives 10 health points)

@@ -1,0 +1,76 @@
+/* copyright (c) 2026 mykyta polishyk, see LICENSE file for more info */
+
+#include "SDL/SDL.h"
+#include "SDL/SDL_image.h"
+#include "SDL/SDL_gfxPrimitives.h"
+
+#include "protocol.h"
+#include "types.h"
+
+#ifndef SCREEN_H
+#define SCREEN_H
+
+// Sprites global pointers
+// Tees tileset
+extern SDL_Surface *TeeTilesetLeft;
+extern SDL_Surface *TeeTilesetRight;
+// Weapons tileset
+extern SDL_Surface *WeaponsTilesetLeft;
+extern SDL_Surface *WeaponsTilesetRight;
+// Logo animation
+extern SDL_Surface *LogoAnimation; // This animation have 20 frames
+// Armor and health icons tileset
+extern SDL_Surface *HealthTileset;
+extern SDL_Surface *ArmorTileset;
+// Clouds tileset
+extern SDL_Surface *CloudsTileset;
+// Menu frame
+extern SDL_Surface *MenuFrame;
+// Copyright
+extern SDL_Surface *MenuCopyright;
+// Menu background
+extern SDL_Surface *MenuBackground;
+// Cool 3D banner
+extern SDL_Surface *Banner;
+// Text tileset
+extern SDL_Surface *TextTileset; // This have 36 frames
+
+enum{ // Tee tileset
+	tee_idle=1,
+	tee_walk1,
+	tee_walk2,
+	tee_jump
+};
+
+enum{ // Weapons tileset
+	gun=1,
+	rifle,
+	shotgun,
+	grenade
+};
+
+enum{ // Health tileset
+	health1=1,
+	health5,
+	healht10
+};
+
+enum{ // Armor tileset
+	armor1=1,
+	armor5,
+	armor10
+};
+
+// GFX important functions
+void LoadSprites(); // Load sprites into pointers
+void DrawRectangle(int x, int y, int w, int h, int color); // Draw rectange with size and color
+SDL_Surface* LoadTexture(char *path); // Load texture into surface
+void DrawSurface(SDL_Surface *surface, int x, int y, int color); // Draw surface with size and color
+void DrawAnimationSurface(SDL_Surface *surface, int x, int y, int color, int numofframes, int frame); // Drawing surface, but with frame animation (Can be helpfull in animations)
+// Game GFX functions
+void DrawTee(int x, int y, PlayerState state, int color); // Drawing player with color, and animation
+void DrawMap(int x, int y, Map *object, int color); // Draw map with game objects (like pickups and etc)
+void DrawClouds(); // Drawing fully animated clouds
+void DrawString(int x, int y, char *string, int color); // Drawing text using text atlas
+
+#endif
