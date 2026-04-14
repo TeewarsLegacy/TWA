@@ -17,8 +17,6 @@ extern SDL_Surface *TeeTilesetRight;
 // Weapons tileset
 extern SDL_Surface *WeaponsTilesetLeft;
 extern SDL_Surface *WeaponsTilesetRight;
-// Logo animation
-extern SDL_Surface *LogoAnimation; // This animation have 20 frames
 // Armor and health icons tileset
 extern SDL_Surface *HealthTileset;
 extern SDL_Surface *ArmorTileset;
@@ -72,5 +70,5 @@ void DrawTee(int x, int y, PlayerState state, int color); // Drawing player with
 void DrawMap(int x, int y, Map *object, int color); // Draw map with game objects (like pickups and etc)
 void DrawClouds(); // Drawing fully animated clouds
 void DrawString(int x, int y, char *string, int color); // Drawing text using text atlas
-
+void DrawAnimatedString(int x, int y, char *string, int color); // Drawing text using text atlas with cool effect
 #endif

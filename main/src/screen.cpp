@@ -10,8 +10,6 @@ SDL_Surface *TeeTilesetRight;
 // Weapons tileset
 SDL_Surface *WeaponsTilesetLeft;
 SDL_Surface *WeaponsTilesetRight;
-// Logo animation
-SDL_Surface *LogoAnimation;
 // Armor and health icons tileset
 SDL_Surface *HealthTileset;
 SDL_Surface *ArmorTileset;
@@ -36,7 +34,6 @@ void LoadSprites(){
 	TeeTilesetRight = LoadTexture("data/tees_right.png");
 	WeaponsTilesetLeft = LoadTexture("data/weapons_left.png");
 	WeaponsTilesetRight = LoadTexture("data/weapons_right.png");
-	LogoAnimation = LoadTexture("data/logo.png");
 	HealthTileset = LoadTexture("data/health.png");
 	ArmorTileset = LoadTexture("data/armor.png");
 	CloudsTileset = LoadTexture("data/clouds.png");
@@ -155,6 +152,18 @@ void DrawString(int x, int y, char *string, int color){
     	for (int i = 0; i < strlen(TextFromTileset); i++){
     		if (TextFromTileset[i] == string[n]){
 				DrawAnimationSurface(TextTileset, x + n * 32, y, color, 36, i+1);
+    		}
+    	}
+    }
+}
+
+
+/* Drawing text using text atlas with cool effect */
+void DrawAnimatedString(int x, int y, char *string, int color){
+    for(int n = 0; n < strlen(string); n++){
+    	for (int i = 0; i < strlen(TextFromTileset); i++){
+    		if (TextFromTileset[i] == string[n]){
+				DrawAnimationSurface(TextTileset, x + n * 32, y + sin((SDL_GetTicks()/500.0)+n*0.1)*15, color, 36, i+1);
     		}
     	}
     }

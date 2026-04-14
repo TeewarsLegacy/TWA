@@ -10,7 +10,6 @@
 extern SDL_Surface *Screen;
 
 MenuCore::MenuCore(){
-    LogoAnimationCounter = 1;
     BgAnimationCounter = 0;
     PlayMusic();
 	return;
@@ -42,13 +41,9 @@ MenuState MenuCore::MainLoop(){
     DrawString(120,280,"PLAY",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
     DrawString(120,340,"SETTINGS",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
     DrawString(120,400,"EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-    // Drawing and updating logo
-    DrawAnimationSurface(LogoAnimation, 80,160,SDL_MapRGBA(Screen->format, 255, 255, 255, 255),20,LogoAnimationCounter);
-    LogoAnimationCounter+=1;
+    // Drawing logo
+    DrawAnimatedString(120,120,"TEEWARS LEGACY",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
     BgAnimationCounter-=5;
-    if (LogoAnimationCounter == 20){
-        LogoAnimationCounter = 1;
-    }
     if (BgAnimationCounter <= -MenuBackground->w){
         BgAnimationCounter = 0;
     }

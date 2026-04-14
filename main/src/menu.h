@@ -13,7 +13,6 @@ public:
 	MenuState ServerlistLoop();
 private:
 	SDL_Event Event;
-    int LogoAnimationCounter;
     int BgAnimationCounter;
 };
 

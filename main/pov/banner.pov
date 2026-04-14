@@ -1,3 +1,10 @@
+// Persistence of Vision Ray Tracer Scene Description File
+// File: banner.pov
+// Vers: 3.5
+// Desc: Banner 1 for teewars legacy
+// Date: 02/**/2026
+// Auth: Mykyta Polishyk
+
 #version 3.5;
 
 #include "colors.inc"
