@@ -66,7 +66,7 @@ void ClientMain(){
 	while (true){
 		switch (state){
 			case online:
-				state = Menu->MainLoop();
+				state = Game->Loop();
 				break;
 		}
 	}

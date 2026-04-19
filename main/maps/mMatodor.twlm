@@ -1,0 +1,106 @@
+; Copyright 2026 Roman Chebykin (Matodor)
+; Fixed by ZABIDEN
+point 
+x 0 
+y 18.75
+point 
+x 12.5 
+y 18.75
+point 
+x 12.5 
+y 20.3125
+point 
+x 0 
+y 20.3125
+point 
+x 0 
+y 18.75
+break
+point 
+x 17.1875 
+y 18.75
+point 
+x 28.125 
+y 18.75
+point 
+x 28.125 
+y 20.3125
+point 
+x 17.1875 
+y 20.3125
+point 
+x 17.1875 
+y 18.75
+break
+point 
+x 32.8125
+y 18.75
+point 
+x 46.875 
+y 18.75
+point 
+x 46.875 
+y 20.3125
+point 
+x 32.8125 
+y 20.3125
+point 
+x 32.8125
+y 18.75
+break
+point 
+x 18.75 
+y 14.0625
+point 
+x 26.5625 
+y 14.0625
+point 
+x 26.5625 
+y 14.6875
+point 
+x 18.75 
+y 14.6875
+point 
+x 18.75 
+y 14.0625
+break
+point 
+x 37.5 
+y 10.9375
+point 
+x 43.75 
+y 10.9375
+point 
+x 43.75 
+y 11.5625
+point 
+x 37.5 
+y 11.5625
+point 
+x 37.5 
+y 10.9375
+break
+object SPAWN 
+x 3.125 
+y 18.125
+object SPAWN 
+x 45.3125 
+y 18.125
+object WEAPON_GUN 
+x 6.25 
+y 18.125
+object WEAPON_SHOTGUN 
+x 22.65625 
+y 13.4375
+object WEAPON_GRENADE 
+x 40.625 
+y 10.3125
+object HEALTH_5 
+x 22.65625 
+y 18.125
+object ARMOR_5 
+x 40.625 
+y 10.3125
+object ARMOR_1 
+x 6.25 
+y 18.125

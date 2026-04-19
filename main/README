@@ -4,8 +4,12 @@ Description:
 Teewars legacy - its online dead match game licensed under zlib license, where you control small tee on big maps to kill another tee's and get big score. You can download it and play indefinitely, and this game fully FREE.
 --------------
 Features:
-* 1 Excellent map
+* 2 Excellent map
 This project is currently in early development (INDEV
+--------------
+Authors:
+Mykyta Polishyk (ZabidenHTF) - Main developer
+Roman Chebykin (Matodor) - Map designer
 --------------
 Copyright (c) 2007 Magnus Auvinen
 Copyright (c) 2026 Mykyta Polishyk

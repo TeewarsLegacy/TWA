@@ -7,9 +7,11 @@
 
 // Global objects
 extern SDL_Surface *Screen;
+int xpos = 0;
+int ypos = 0;
 
 GameCore::GameCore(){
-    LoadMap(&object, "dm1");
+    LoadMap(&object, "mMatodor");
 	return;
 }
 
@@ -26,7 +28,9 @@ MenuState GameCore::Loop(){
         	SDL_Quit();
             exit(0);
     }
-    DrawMap(20, 0, &object,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    xpos-=2;
+    ypos--;
+    DrawMap(xpos, ypos, &object,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
     DrawSurface(MenuFrame, 0,0,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
     DrawClouds();
     DrawString(0,400,"ZABIDEN1234567890",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
