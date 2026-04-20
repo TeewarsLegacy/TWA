@@ -9,7 +9,7 @@ extern void ServerMain(int Port, char *Map);
 int main(int argc, char *argv[])
 {
 	bool IsSrv = false;
-    int Port = 80;
+    int Port = 5000;
     char *Map="dm1";
 
     for (int i = 1; i < argc; i++) {

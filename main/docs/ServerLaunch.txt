@@ -1,0 +1,20 @@
+SERVER LAUNCH
+------------
+To launch server you can use flag -s in terminal or windows CMD
+For example:
+./teewarslegacy -s (Linux systems)
+.\teewarslegacy -s (Windows systems)
+------------
+PORT
+------------
+By default server start on port 5000, but you can change it using -p flag.
+For example:
+./teewarslegacy -s -p 6000 (Linux systems)
+.\teewarslegacy -s -p 6000 (Windows systems)
+------------
+MAP SELECT
+------------
+To select your own map you can use flag -m.
+For example:
+./teewarslegacy -s -m mMatodor (Linux systems)
+.\teewarslegacy -s -m mMatodor (Windows systems)

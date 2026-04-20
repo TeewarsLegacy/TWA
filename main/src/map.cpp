@@ -99,10 +99,5 @@ void LoadMap(Map *object, const char* map_name){
     // Cloning info about vertices into object
     object->vertices_n = n_vertex;
     object->objects_n = n_objects;
-
-    // Debug output
-    for (int i = 0; i < n_vertex; i ++){
-    	printf("Vertex %d on pos %d %d\n", i, object->vertices[i].x, object->vertices[i].y);
-    }
     fclose(file_pointer);
 }
