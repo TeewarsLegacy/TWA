@@ -27,13 +27,15 @@ void SendPacket(){
 	NetUDPSend(SSocket, &Client, &SPacket, sizeof(SPacket));
 }
 
-void ServerMain(int Port){
+void ServerMain(int Port, char *Map){
+	// Configuration of server
 	ServerPort = Port;
 	// Creating server
 	NetInit();
 	SSocket = NetUDPOpen(ServerPort);
 	printf("Server listening on port %d\n",ServerPort);
-	LoadMap(&SPacket.current_map, "dm1");
+	// Loading map
+	LoadMap(&SPacket.current_map, Map);
 	while (true){
         int size = NetUDPRecv(SSocket, &Client, buffer, MAX_PACKET_SIZE);
         if (size > 0)

@@ -4,12 +4,13 @@
 #include <stdlib.h>
 
 extern void ClientMain();
-extern void ServerMain(int Port);
+extern void ServerMain(int Port, char *Map);
 
 int main(int argc, char *argv[])
 {
 	bool IsSrv = false;
     int Port = 80;
+    char *Map="dm1";
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "-s") == 0) {
@@ -21,10 +22,13 @@ int main(int argc, char *argv[])
                 i++;
             }
         }
+        else if (strcmp(argv[i], "-m") == 0) {
+            Map = argv[i + 1];
+        }
     }
 
     if (IsSrv) {
-        ServerMain(Port);
+        ServerMain(Port, Map);
     } else {
         ClientMain();
     }
