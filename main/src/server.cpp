@@ -17,18 +17,35 @@
 #include "network.h"
 #include "protocol.h"
 
-NPacket Packet;
+NetAddr Client;
+NPacket SPacket;
+char buffer[MAX_PACKET_SIZE] = "\0";
+int SSocket;
 unsigned int ServerPort = 80;
+
+void SendPacket(){
+	NetUDPSend(SSocket, &Client, &SPacket, sizeof(SPacket));
+}
 
 void ServerMain(int Port){
 	ServerPort = Port;
 	// Creating server
 	NetInit();
-	NetUPDOpen(ServerPort);
+	SSocket = NetUDPOpen(ServerPort);
 	printf("Server listening on port %d\n",ServerPort);
-	LoadMap(&Packet.current_map, "dm1");
+	LoadMap(&SPacket.current_map, "dm1");
 	while (true){
-		printf("Testing delay\n");
+        int size = NetUDPRecv(SSocket, &Client, buffer, MAX_PACKET_SIZE);
+        if (size > 0)
+		{
+		    buffer[size] = '\0';printf("Got: %s\n", buffer);
+
+		    if (strcmp(buffer, "Connected") == 0)
+		    {
+		        printf("Player connected\n");
+		        SendPacket();
+		    }
+		}
 		SDL_Delay(16);
 	}
 }

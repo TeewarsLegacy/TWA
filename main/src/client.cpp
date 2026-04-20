@@ -30,7 +30,7 @@ void ClientMain(){
 	Game = new GameCore(); 
 	Menu = new MenuCore(); 
 
-	MenuState state=m_titlescreen;
+	MenuState state=m_online;
 	// Initialization of SDL
 	if (SDL_Init(SDL_INIT_AUDIO|SDL_INIT_VIDEO) < 0) {
 		fprintf(stderr, "Failed to initializate SDL");
@@ -63,6 +63,8 @@ void ClientMain(){
 	strcat(WindowCaption, TWLEGACY_MILESTONE);
 	SDL_WM_SetCaption(WindowCaption, NULL);
 
+	Game->Connect(inet_addr("127.0.0.1"), 5000);
+
 	while (true){
 		switch (state){
 			case m_titlescreen:
@@ -70,6 +72,7 @@ void ClientMain(){
 				break;
 			case m_online:
 				state = Game->Loop();
+				Game->NetworkLoop();
 				break;
 			case m_authors:
 				state = Menu->AuthorsLoop();

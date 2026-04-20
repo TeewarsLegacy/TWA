@@ -11,7 +11,18 @@ int NetInit() // Initialization of socket
 #endif
 }
 
-int NetUPDOpen(unsigned short port) // Open socket
+void SetNONBlock(int sock){
+// Non-blocking recv
+#ifdef _WIN32
+    u_long mode = 1;
+    ioctlsocket(sock, FIONBIO, &mode);
+#else
+    int flags = fcntl(sock, F_GETFL, 0);
+    fcntl(sock, F_SETFL, flags | O_NONBLOCK);
+#endif
+}
+
+int NetUDPOpen(unsigned short port) // Open socket
 {
     int sock = socket(AF_INET, SOCK_DGRAM, 0);
 
@@ -27,7 +38,7 @@ int NetUPDOpen(unsigned short port) // Open socket
     return sock;
 }
 
-int NetUPDSend(int sock, NetAddr *addr, void *data, int size) // Sending data
+int NetUDPSend(int sock, NetAddr *addr, const void *data, int size) // Sending data
 {
     struct sockaddr_in a;
 
@@ -39,7 +50,7 @@ int NetUPDSend(int sock, NetAddr *addr, void *data, int size) // Sending data
                   (struct sockaddr*)&a, sizeof(a));
 }
 
-int NetUPDRecv(int sock, NetAddr *addr, void *buffer, int maxsize) // Getting data
+int NetUDPRecv(int sock, NetAddr *addr, void *buffer, int maxsize)
 {
     struct sockaddr_in a;
     socklen_t len = sizeof(a);
@@ -47,11 +58,11 @@ int NetUPDRecv(int sock, NetAddr *addr, void *buffer, int maxsize) // Getting da
     int r = recvfrom(sock, buffer, maxsize, 0,
                      (struct sockaddr*)&a, &len);
 
-    if(r > 0)
-    {
-        addr->ip = a.sin_addr.s_addr;
-        addr->port = ntohs(a.sin_port);
-    }
+    if (r <= 0)
+        return 0;
+
+    addr->ip = a.sin_addr.s_addr;
+    addr->port = ntohs(a.sin_port);
 
     return r;
 }
