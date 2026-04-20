@@ -2,8 +2,10 @@
 #ifndef PROTOCOL_H
 #define PROTOCOL_H
 
+#define MAX_PLAYERS 8
+
 /* Network input struct */
-struct Input{
+struct NInput{
 	int left;
 	int right;
 	int angle;
@@ -11,6 +13,14 @@ struct Input{
 	int fire;
 	int hook;
 	int activeweapon;
+};
+
+/* Network player entity */
+struct NPlayer{
+	int id;
+	int x;
+	int y;
+	int angle;
 };
 
 /* Vertex of vertex map system, also this is like float, but 1 is 32/32 */
@@ -32,6 +42,12 @@ struct Map{
 	int objects_n;
 	MapVertex vertices[1024];
 	MapObject objects[64];
+};
+
+/* Network packet object */
+struct NPacket{
+	NPlayer players[MAX_PLAYERS];
+	Map current_map;
 };
 
 /* Server info struct */
