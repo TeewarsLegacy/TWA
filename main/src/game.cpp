@@ -36,5 +36,5 @@ MenuState GameCore::Loop(){
     DrawString(0,400,"ZABIDEN1234567890",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 	SDL_Flip(Screen);
 	SDL_Delay(16); // 60 fps
-	return online;
+	return m_online;
 }

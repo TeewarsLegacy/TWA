@@ -10,10 +10,12 @@ class MenuCore{
 public:
 	MenuCore();
 	MenuState MainLoop();
+	MenuState AuthorsLoop();
 	MenuState ServerlistLoop();
 private:
 	SDL_Event Event;
     int BgAnimationCounter;
+    int AuthorsAnimationCounter;
 };
 
 #endif

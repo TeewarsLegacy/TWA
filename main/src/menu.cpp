@@ -11,6 +11,7 @@ extern SDL_Surface *Screen;
 
 MenuCore::MenuCore(){
     BgAnimationCounter = 0;
+    AuthorsAnimationCounter = 0;
     PlayMusic();
 	return;
 }
@@ -49,5 +50,31 @@ MenuState MenuCore::MainLoop(){
     }
 	SDL_Flip(Screen);
 	SDL_Delay(16); // 60 fps
-	return online;
+	return m_titlescreen;
+}
+
+
+MenuState MenuCore::AuthorsLoop(){
+    SDL_FillRect(Screen, NULL, SDL_MapRGB(Screen->format, 0,0,0)); // Cleaning screen
+
+    SDL_PollEvent(&Event);
+    switch (Event.type) { // Listening events
+        case SDL_KEYDOWN:
+            return m_titlescreen;
+            break;
+        case SDL_QUIT:
+            SDL_Quit();
+            exit(0);
+    }
+    // Drawing background tiles
+    for (int y=0; y < round(600/MenuBackground->h)*2; y++){
+        for (int x=0; x < round(800/MenuBackground->w)*3; x++){
+            DrawSurface(MenuBackground, BgAnimationCounter+MenuBackground->w*x,MenuBackground->h*y,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+        }
+    }
+    // Drawing message
+    DrawString(120,568,"PRESS ANY KEY TO EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    SDL_Flip(Screen);
+    SDL_Delay(16); // 60 fps
+    return m_authors;
 }

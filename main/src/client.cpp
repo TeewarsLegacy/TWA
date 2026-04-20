@@ -30,7 +30,7 @@ void ClientMain(){
 	Game = new GameCore(); 
 	Menu = new MenuCore(); 
 
-	MenuState state=online;
+	MenuState state=m_titlescreen;
 	// Initialization of SDL
 	if (SDL_Init(SDL_INIT_AUDIO|SDL_INIT_VIDEO) < 0) {
 		fprintf(stderr, "Failed to initializate SDL");
@@ -65,8 +65,16 @@ void ClientMain(){
 
 	while (true){
 		switch (state){
-			case online:
+			case m_titlescreen:
+				state = Menu->MainLoop();
+				break;
+			case m_online:
 				state = Game->Loop();
+				break;
+			case m_authors:
+				state = Menu->AuthorsLoop();
+				break;
+			case m_exit:
 				break;
 		}
 	}

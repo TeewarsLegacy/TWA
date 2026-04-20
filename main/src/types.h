@@ -5,9 +5,12 @@
 
 // Menu state
 enum MenuState{
-	serverlist = 0, // Servers list
-	online, // Nothing, because player ingame
-	pausemenu // Pause menu
+	m_titlescreen=0,
+	m_serverlist, // Servers list
+	m_authors, // Game authors screen
+	m_online, // Nothing, because player ingame
+	m_pausemenu, // Pause menu
+	m_exit // Exit from game
 };
 
 // Player state
