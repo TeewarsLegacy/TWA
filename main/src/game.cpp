@@ -7,6 +7,8 @@
 
 // Global objects
 extern SDL_Surface *Screen;
+extern bool Connected;
+extern void CloseClient();
 NPacket CPacket;
 
 int xpos = 0;
@@ -18,10 +20,11 @@ GameCore::GameCore(){
 
 void GameCore::Connect(unsigned int ip, unsigned short port){
     // Creating connection
+    Connected=true;
     NetInit();
     Socket = NetUDPOpen(0);
     SetNONBlock(Socket);
-    inet_pton(AF_INET, "127.0.0.1", &Server.ip);
+    Server.ip = ip;
     Server.port = port;
     NetUDPSend(Socket, &Server, "Connected", strlen("Connected"));
 }
@@ -37,19 +40,23 @@ MenuState GameCore::Loop(){
 	SDL_PollEvent(&Event);
     switch (Event.type) { // Listening events
         case SDL_KEYDOWN:
-            printf("The %s key was pressed!\n",
-                   SDL_GetKeyName(Event.key.keysym.sym));
-            break;
+            switch (Event.key.keysym.sym){
+                case SDLK_ESCAPE:
+                    NetClose(Socket);
+                    Connected=false;
+                    return m_titlescreen;
+                default:
+                    printf("The %s key was pressed!\n",SDL_GetKeyName(Event.key.keysym.sym));
+                    break;
+            }
         case SDL_QUIT:
-        	SDL_Quit();
+        	CloseClient();
             exit(0);
     }
     xpos-=2;
     ypos--;
-    DrawMap(xpos, ypos, &CPacket.current_map,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-    DrawSurface(MenuFrame, 0,0,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawMap(xpos, ypos, &CPacket.current_map);
     DrawClouds();
-    DrawString(0,400,"ZABIDEN1234567890",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 	SDL_Flip(Screen);
 
 	SDL_Delay(16); // 60 fps

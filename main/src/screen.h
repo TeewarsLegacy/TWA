@@ -28,6 +28,8 @@ extern SDL_Surface *MenuFrame;
 extern SDL_Surface *MenuCopyright;
 // Menu background
 extern SDL_Surface *MenuBackground;
+// Arrow menu icon
+extern SDL_Surface *MenuArrow;
 // Cool 3D banner
 extern SDL_Surface *Banner;
 // Text tileset
@@ -67,7 +69,7 @@ void DrawSurface(SDL_Surface *surface, int x, int y, int color); // Draw surface
 void DrawAnimationSurface(SDL_Surface *surface, int x, int y, int color, int numofframes, int frame); // Drawing surface, but with frame animation (Can be helpfull in animations)
 // Game GFX functions
 void DrawTee(int x, int y, PlayerState state, int color); // Drawing player with color, and animation
-void DrawMap(int x, int y, Map *object, int color); // Draw map with game objects (like pickups and etc)
+void DrawMap(int x, int y, Map *object); // Draw map with game objects (like pickups and etc)
 void DrawClouds(); // Drawing fully animated clouds
 void DrawString(int x, int y, char *string, int color); // Drawing text using text atlas
 void DrawAnimatedString(int x, int y, char *string, int color); // Drawing text using text atlas with cool effect

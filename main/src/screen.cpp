@@ -21,6 +21,8 @@ SDL_Surface *MenuFrame;
 SDL_Surface *MenuCopyright;
 // Menu background
 SDL_Surface *MenuBackground;
+// Arrow menu icon
+SDL_Surface *MenuArrow;
 // Cool 3D banner
 SDL_Surface *Banner;
 // Text tileset
@@ -40,6 +42,7 @@ void LoadSprites(){
 	MenuFrame = LoadTexture("data/menu_frame.png");
 	MenuCopyright = LoadTexture("data/copyright.png");
 	MenuBackground = LoadTexture("data/background.png");
+	MenuArrow = LoadTexture("data/arrow.png");
 	Banner = LoadTexture("data/banner.png");
 	TextTileset = LoadTexture("data/text.png");
 }
@@ -112,17 +115,36 @@ void DrawTee(int x, int y, PlayerState state, int color){
 	}
 }
 /* Draw map with game objects (like pickups and etc) */
-void DrawMap(int x, int y, Map *object, int color){
-    // Draw outline
-    for(int i=0;i<object->vertices_n;i++){
-	    int next = i+1;
-	    if (object->vertices[i].last != true){
-	    	lineColor(Screen,
-	             object->vertices[i].x + x, object->vertices[i].y + y,
-	             object->vertices[next].x + x, object->vertices[next].y + y,
-	             color);
-	    }
-	}
+void DrawMap(int x, int y, Map *object){
+	Sint16 vx[1024];
+    Sint16 vy[1024];
+
+    int count = 0;
+    // Drawing map polygon with outline
+    for (int i = 0; i < object->vertices_n; i++)
+    {
+        vx[count] = object->vertices[i].x + x;
+        vy[count] = object->vertices[i].y + y;
+        count++;
+
+        // if this last polygon we draw polygon
+        if (object->vertices[i].last == true || i == object->vertices_n - 1)
+        {
+            if (count >= 3)
+            {
+                filledPolygonRGBA(Screen,
+                                  vx, vy,
+                                  count,
+                                  100, 70, 20, 255);
+                polygonRGBA(Screen,
+                            vx, vy,
+                            count,
+                            0, 0, 0, 255);
+            }
+
+            count = 0; // reseting counter
+        }
+    }
 	// Draw objects
 	for(int i=0;i<object->objects_n;i++){
 		// For debug we use a tee icon

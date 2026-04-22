@@ -15,7 +15,6 @@
 
 // Global objects
 SDL_Surface *Screen;
-NetAddr ConnectAddr;
 // Time
 Uint32 CurrentTime;
 Uint32 PrevTime;
@@ -25,12 +24,21 @@ MenuCore *Menu;
 
 Mix_Music *Music;
 
+bool Connected = false;
+
+void CloseClient(){
+	// Removing objects
+	delete Game;
+	delete Menu;
+    SDL_Quit(); // Closing window
+}
+
 void ClientMain(){
 	// Initialization of objects
 	Game = new GameCore(); 
 	Menu = new MenuCore(); 
 
-	MenuState state=m_online;
+	MenuState state=m_titlescreen;
 	// Initialization of SDL
 	if (SDL_Init(SDL_INIT_AUDIO|SDL_INIT_VIDEO) < 0) {
 		fprintf(stderr, "Failed to initializate SDL");
@@ -63,8 +71,6 @@ void ClientMain(){
 	strcat(WindowCaption, TWLEGACY_MILESTONE);
 	SDL_WM_SetCaption(WindowCaption, NULL);
 
-	Game->Connect(inet_addr("127.0.0.1"), 5000);
-
 	while (true){
 		switch (state){
 			case m_titlescreen:
@@ -77,13 +83,12 @@ void ClientMain(){
 			case m_authors:
 				state = Menu->AuthorsLoop();
 				break;
+			case m_help:
+				state = Menu->HelpLoop();
+				break;
 			case m_exit:
 				break;
 		}
 	}
-	// Removing objects
-	delete Game;
-	delete Menu;
-    SDL_Quit(); // Closing window
-
+	CloseClient();
 }

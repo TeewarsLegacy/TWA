@@ -11,11 +11,13 @@ public:
 	MenuCore();
 	MenuState MainLoop();
 	MenuState AuthorsLoop();
+	MenuState HelpLoop();
 	MenuState ServerlistLoop();
 private:
 	SDL_Event Event;
     int BgAnimationCounter;
     int AuthorsAnimationCounter;
+    int Selector = 0;
 };
 
 #endif

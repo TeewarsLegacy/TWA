@@ -8,6 +8,7 @@ enum MenuState{
 	m_titlescreen=0,
 	m_serverlist, // Servers list
 	m_authors, // Game authors screen
+	m_help,
 	m_online, // Nothing, because player ingame
 	m_pausemenu, // Pause menu
 	m_exit // Exit from game
