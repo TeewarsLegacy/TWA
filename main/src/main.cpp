@@ -32,4 +32,6 @@ int main(int argc, char *argv[])
     } else {
         ClientMain();
     }
+
+    return 0;
 }

@@ -8,7 +8,6 @@
 // Global objects
 extern SDL_Surface *Screen;
 extern bool Connected;
-extern void CloseClient();
 NPacket CPacket;
 
 int xpos = 0;
@@ -34,31 +33,38 @@ void GameCore::NetworkLoop(){
 }
 
 MenuState GameCore::Loop(){
-
 	SDL_FillRect(Screen, NULL, SDL_MapRGB(Screen->format, 120,120,255)); // Cleaning screen
 
-	SDL_PollEvent(&Event);
-    switch (Event.type) { // Listening events
-        case SDL_KEYDOWN:
-            switch (Event.key.keysym.sym){
-                case SDLK_ESCAPE:
-                    NetClose(Socket);
-                    Connected=false;
-                    return m_titlescreen;
-                default:
-                    printf("The %s key was pressed!\n",SDL_GetKeyName(Event.key.keysym.sym));
-                    break;
-            }
-        case SDL_QUIT:
-        	CloseClient();
-            exit(0);
+    while (SDL_PollEvent(&Event)){
+        switch (Event.type) { // Listening events
+            case SDL_KEYDOWN:
+                switch (Event.key.keysym.sym){
+                    case SDLK_ESCAPE:
+                        Connected=false;
+                        NetClose(Socket);
+                        return m_titlescreen;
+                    case SDLK_LEFT:
+                        xpos++;
+                        break;
+                    case SDLK_RIGHT:
+                        xpos--;
+                        break;
+                    case SDLK_UP:
+                        ypos++; 
+                        break;
+                    case SDLK_DOWN:
+                        ypos--;
+                        break;
+                }
+                break;
+            case SDL_QUIT:
+                return m_exit;
+        }
     }
-    xpos-=2;
-    ypos--;
+    DrawSurface(MenuFrame, 800/2-700/2,140,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawString(800/2-32*10/2,400, "CONNECTING", SDL_MapRGB(Screen->format, 255,255,255));
     DrawMap(xpos, ypos, &CPacket.current_map);
     DrawClouds();
 	SDL_Flip(Screen);
-
-	SDL_Delay(16); // 60 fps
 	return m_online;
 }

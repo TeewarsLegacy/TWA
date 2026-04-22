@@ -4,6 +4,8 @@
 
 #define MAX_PLAYERS 8
 
+#include "types.h"
+
 /* Network input struct */
 struct NInput{
 	int left;
@@ -12,15 +14,19 @@ struct NInput{
 	int jump;
 	int fire;
 	int hook;
-	int activeweapon;
+	int active_weapon;
 };
 
 /* Network player entity */
 struct NPlayer{
 	int id;
+	char name[32];
 	int x;
 	int y;
 	int angle;
+	int active_weapon;
+	int current_state;
+
 };
 
 /* Vertex of vertex map system, also this is like float, but 1 is 32/32 */
@@ -59,7 +65,14 @@ struct ServerInfo{
 	char password[16];
 };
 
-enum{
+enum{ //  Weapons
+	GUN=0,
+	SHOTGUN,
+	RIFLE,
+	GRENADE
+};
+
+enum{ // Game objects
 	ITEM_NULL = 0,
 	SPAWN,
 	WEAPON_GUN,

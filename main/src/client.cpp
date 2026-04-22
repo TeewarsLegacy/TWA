@@ -26,13 +26,6 @@ Mix_Music *Music;
 
 bool Connected = false;
 
-void CloseClient(){
-	// Removing objects
-	delete Game;
-	delete Menu;
-    SDL_Quit(); // Closing window
-}
-
 void ClientMain(){
 	// Initialization of objects
 	Game = new GameCore(); 
@@ -59,8 +52,6 @@ void ClientMain(){
 	if (!Music) {
 	    printf("Load failed: %s\n", Mix_GetError());
 	}
-
-	Mix_PlayMusic(Music, -1);
 	// Loading data
 	LoadSprites();
 	// Creating window
@@ -70,6 +61,7 @@ void ClientMain(){
 	strcpy(WindowCaption, "Teewars legacy milestone ");
 	strcat(WindowCaption, TWLEGACY_MILESTONE);
 	SDL_WM_SetCaption(WindowCaption, NULL);
+	SDL_ShowCursor(SDL_DISABLE);
 
 	while (true){
 		switch (state){
@@ -77,8 +69,8 @@ void ClientMain(){
 				state = Menu->MainLoop();
 				break;
 			case m_online:
-				state = Game->Loop();
 				Game->NetworkLoop();
+				state = Game->Loop();
 				break;
 			case m_authors:
 				state = Menu->AuthorsLoop();
@@ -87,8 +79,12 @@ void ClientMain(){
 				state = Menu->HelpLoop();
 				break;
 			case m_exit:
-				break;
+				// Removing objects
+				delete Game;
+				delete Menu;
+			    SDL_Quit(); // Closing window
 		}
+
+		SDL_Delay(16); // 60 fps
 	}
-	CloseClient();
 }

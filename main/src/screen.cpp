@@ -147,7 +147,9 @@ void DrawMap(int x, int y, Map *object){
     }
 	// Draw objects
 	for(int i=0;i<object->objects_n;i++){
-		// For debug we use a tee icon
+		switch (object->objects[i].type){
+			
+		}
 		DrawAnimationSurface(TeeTilesetLeft, object->objects[i].x + x, object->objects[i].y + y, SDL_MapRGBA(Screen->format, 255, 255, 255, 255),4,1);
 	}
 }
