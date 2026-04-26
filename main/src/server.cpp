@@ -34,7 +34,7 @@ void ServerMain(int Port, char *Map, char *Name){
 	// Creating server
 	NetInit();
 	SSocket = NetUDPOpen(ServerPort);
-	printf("Server listening on port %d\n",ServerPort);
+	printf("Server with name '%s' listening on port %d\n", Name ,ServerPort);
 	// Sending info about server for masterserver
 	SInfo.players_count = 0;
 	strcpy(SInfo.name, Name);

@@ -18,3 +18,10 @@ To select your own map you can use flag -m.
 For example:
 ./teewarslegacy -s -m mMatodor (Linux systems)
 .\teewarslegacy -s -m mMatodor (Windows systems)
+------------
+NAME SELECT
+------------
+To select server name you can use flag -n
+For example:
+./teewarslegacy -s -n "24 on 7 DM SERVER" (Linux systems)
+.\teewarslegacy -s -n "24 on 7 DM SERVER" (Windows systems)

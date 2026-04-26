@@ -32,8 +32,8 @@ int main(int argc, char *argv[])
         else if (strcmp(argv[i], "-m") == 0) {
             Map = argv[i + 1];
         }
-        else if (strcmp(argv[i], "-n") == 0) {
-            SName = argv[i + 1];
+        else if (strcmp(argv[i], "-n") == 0 && i + 1 < argc) {
+            SName = argv[++i];
         }
     }
 
