@@ -8,7 +8,7 @@
 // Global objects
 extern SDL_Surface *Screen;
 extern bool Connected;
-NPacket CPacket;
+extern int CSocket;
 
 int xpos = 0;
 int ypos = 0;
@@ -20,16 +20,13 @@ GameCore::GameCore(){
 void GameCore::Connect(unsigned int ip, unsigned short port){
     // Creating connection
     Connected=true;
-    NetInit();
-    Socket = NetUDPOpen(0);
-    SetNONBlock(Socket);
     Server.ip = ip;
     Server.port = port;
-    NetUDPSend(Socket, &Server, "Connected", strlen("Connected"));
+    NetUDPSend(CSocket, &Server, "Connected", strlen("Connected"));
 }
 
 void GameCore::NetworkLoop(){
-    int size = NetUDPRecv(Socket, &Server, &CPacket, sizeof(CPacket));
+    int size = NetUDPRecv(CSocket, &Server, &CPacket, sizeof(CPacket));
 }
 
 MenuState GameCore::Loop(){
@@ -41,7 +38,6 @@ MenuState GameCore::Loop(){
                 switch (Event.key.keysym.sym){
                     case SDLK_ESCAPE:
                         Connected=false;
-                        NetClose(Socket);
                         return m_titlescreen;
                     case SDLK_LEFT:
                         xpos++;
@@ -61,8 +57,6 @@ MenuState GameCore::Loop(){
                 return m_exit;
         }
     }
-    DrawSurface(MenuFrame, 800/2-700/2,140,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-    DrawString(800/2-32*10/2,400, "CONNECTING", SDL_MapRGB(Screen->format, 255,255,255));
     DrawMap(xpos, ypos, &CPacket.current_map);
     DrawClouds();
 	SDL_Flip(Screen);

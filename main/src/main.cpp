@@ -2,15 +2,22 @@
 /* copyright (c) 2026 mykyta polishyk, see LICENSE file for more info */
 #include <string.h>
 #include <stdlib.h>
+#include "network.h"
 
 extern void ClientMain();
-extern void ServerMain(int Port, char *Map);
+extern void ServerMain(int Port, char *Map, char *Name);
+
+NetAddr MasterserverAddr;
 
 int main(int argc, char *argv[])
 {
+    MasterserverAddr.ip = inet_addr("127.0.0.1");
+    MasterserverAddr.port = 6000;
+    
 	bool IsSrv = false;
     int Port = 5000;
     char *Map="dm1";
+    char *SName="Unnamed server";
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "-s") == 0) {
@@ -25,10 +32,13 @@ int main(int argc, char *argv[])
         else if (strcmp(argv[i], "-m") == 0) {
             Map = argv[i + 1];
         }
+        else if (strcmp(argv[i], "-n") == 0) {
+            SName = argv[i + 1];
+        }
     }
 
     if (IsSrv) {
-        ServerMain(Port, Map);
+        ServerMain(Port, Map, SName);
     } else {
         ClientMain();
     }

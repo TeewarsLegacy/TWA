@@ -8,6 +8,7 @@
 #include "types.h"
 #include "game.h"
 #include "menu.h"
+#include "audio.h"
 
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
@@ -23,6 +24,8 @@ GameCore *Game;
 MenuCore *Menu;
 
 Mix_Music *Music;
+
+int CSocket;
 
 bool Connected = false;
 
@@ -52,6 +55,10 @@ void ClientMain(){
 	if (!Music) {
 	    printf("Load failed: %s\n", Mix_GetError());
 	}
+	// Network initialization
+    NetInit();
+    CSocket = NetUDPOpen(0);
+    SetNONBlock(CSocket);
 	// Loading data
 	LoadSprites();
 	// Creating window
@@ -62,6 +69,8 @@ void ClientMain(){
 	strcat(WindowCaption, TWLEGACY_MILESTONE);
 	SDL_WM_SetCaption(WindowCaption, NULL);
 	SDL_ShowCursor(SDL_DISABLE);
+	// Playing music
+	PlayMusic();
 
 	while (true){
 		switch (state){
@@ -77,6 +86,10 @@ void ClientMain(){
 				break;
 			case m_help:
 				state = Menu->HelpLoop();
+				break;
+			case m_serverlist:
+				Menu->NetworkLoop();
+				state = Menu->ServerlistLoop();
 				break;
 			case m_exit:
 				// Removing objects

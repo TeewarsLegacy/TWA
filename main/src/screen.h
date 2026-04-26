@@ -24,12 +24,16 @@ extern SDL_Surface *ArmorTileset;
 extern SDL_Surface *CloudsTileset;
 // Menu frame
 extern SDL_Surface *MenuFrame;
+// Server list frame
+extern SDL_Surface *ServerlistFrame;
 // Copyright
 extern SDL_Surface *MenuCopyright;
 // Menu background
 extern SDL_Surface *MenuBackground;
 // Arrow menu icon
 extern SDL_Surface *MenuArrow;
+// Server list bar
+extern SDL_Surface *ServerlistBar;
 // Cool 3D banner
 extern SDL_Surface *Banner;
 // Text tileset
@@ -71,6 +75,8 @@ void DrawAnimationSurface(SDL_Surface *surface, int x, int y, int color, int num
 void DrawTee(int x, int y, PlayerState state, int color); // Drawing player with color, and animation
 void DrawMap(int x, int y, Map *object); // Draw map with game objects (like pickups and etc)
 void DrawClouds(); // Drawing fully animated clouds
+int StringLength(); // Return length of string in pixels
 void DrawString(int x, int y, char *string, int color); // Drawing text using text atlas
+void DrawCompressedString(int x, int y, char *string, int color); // Drawing compressed text using text atlas
 void DrawAnimatedString(int x, int y, char *string, int color); // Drawing text using text atlas with cool effect
 #endif

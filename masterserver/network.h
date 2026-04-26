@@ -13,6 +13,7 @@
 #else
 	// Linux net livs
     #include <unistd.h>
+    #include <fcntl.h>
     #include <arpa/inet.h>
     #include <sys/socket.h>
 #endif
@@ -27,9 +28,10 @@ typedef struct
 } NetAddr;
 
 int NetInit(); // Initialization of socket
-int NetUPDOpen(unsigned short port); // Open socket
-int NetUPDSend(int sock, NetAddr *addr, void *data, int size); // Sending data
-int NetUPDRecv(int sock, NetAddr *addr, void *buffer, int maxsize); // Getting data
+void SetNONBlock(int sock); 
+int NetUDPOpen(unsigned short port); // Open socket
+int NetUDPSend(int sock, NetAddr *addr, const void *data, int size); // Sending data
+int NetUDPRecv(int sock, NetAddr *addr, void *buffer, int maxsize); // Getting data
 void NetClose(int sock); // Closing socket
 
 #endif

@@ -17,12 +17,16 @@ SDL_Surface *ArmorTileset;
 SDL_Surface *CloudsTileset;
 // Menu frame
 SDL_Surface *MenuFrame;
+// Server list frame
+SDL_Surface *ServerlistFrame;
 // Copyright
 SDL_Surface *MenuCopyright;
 // Menu background
 SDL_Surface *MenuBackground;
 // Arrow menu icon
 SDL_Surface *MenuArrow;
+// Server list bar
+SDL_Surface *ServerlistBar;
 // Cool 3D banner
 SDL_Surface *Banner;
 // Text tileset
@@ -40,9 +44,11 @@ void LoadSprites(){
 	ArmorTileset = LoadTexture("data/armor.png");
 	CloudsTileset = LoadTexture("data/clouds.png");
 	MenuFrame = LoadTexture("data/menu_frame.png");
+	ServerlistFrame = LoadTexture("data/serverlist_frame.png");
 	MenuCopyright = LoadTexture("data/copyright.png");
 	MenuBackground = LoadTexture("data/background.png");
 	MenuArrow = LoadTexture("data/arrow.png");
+	ServerlistBar = LoadTexture("data/serverlist_bar.png");
 	Banner = LoadTexture("data/banner.png");
 	TextTileset = LoadTexture("data/text.png");
 }
@@ -175,12 +181,21 @@ void DrawString(int x, int y, char *string, int color){
     for(int n = 0; n < strlen(string); n++){
     	for (int i = 0; i < strlen(TextFromTileset); i++){
     		if (TextFromTileset[i] == string[n]){
-				DrawAnimationSurface(TextTileset, x + n * 32, y, color, 36, i+1);
+				DrawAnimationSurface(TextTileset, x + n * 24, y, color, 36, i+1);
     		}
     	}
     }
 }
 
+void DrawCompressedString(int x, int y, char *string, int color){
+	for(int n = 0; n < strlen(string); n++){
+    	for (int i = 0; i < strlen(TextFromTileset); i++){
+    		if (TextFromTileset[i] == string[n]){
+				DrawAnimationSurface(TextTileset, x + n * 20, y, color, 36, i+1);
+    		}
+    	}
+    }
+}
 
 /* Drawing text using text atlas with cool effect */
 void DrawAnimatedString(int x, int y, char *string, int color){

@@ -17,7 +17,7 @@ public:
 private:
 	SDL_Event Event;
     NetAddr Server;
-    int Socket;
+	NPacket CPacket;
 };
 
 #endif

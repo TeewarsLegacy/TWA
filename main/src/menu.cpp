@@ -5,18 +5,34 @@
 #include "game.h"
 #include "network.h"
 #include "stdio.h"
+#include "string.h"
 #include "cmath"
 
 // Global objects
 extern SDL_Surface *Screen;
 extern GameCore *Game;
 extern bool Connected;
+extern int CSocket;
+extern NetAddr MasterserverAddr;
 
 MenuCore::MenuCore(){
     BgAnimationCounter = 0;
     AuthorsAnimationCounter = 0;
     PlayMusic();
 	return;
+}
+
+void MenuCore::Refresh(){
+    // Reseting packet
+    MasterserverPacket.servers_count = 0;
+    ServerSelector = 0;
+
+    // After this sending to masterserver
+    NetUDPSend(CSocket, &MasterserverAddr, "Refresh", strlen("Refresh"));
+}
+
+void MenuCore::NetworkLoop(){
+    int size = NetUDPRecv(CSocket, &MasterserverAddr, &MasterserverPacket, sizeof(MasterserverPacket));
 }
 
 MenuState MenuCore::MainLoop(){
@@ -26,27 +42,28 @@ MenuState MenuCore::MainLoop(){
         switch (Event.type) { // Listening events
             case SDL_KEYDOWN:
                 switch (Event.key.keysym.sym){
-                    // Selector
                     case SDLK_ESCAPE:
                         return m_exit;
+                    // Selector
                     case SDLK_UP:
-                        Selector--;
-                        if (Selector < 0) Selector = 4;
+                        TitlescreenSelector--;
+                        if (TitlescreenSelector < 0) TitlescreenSelector = 4;
                         break;
 
                     case SDLK_DOWN:
-                        Selector++;
-                        if (Selector > 4) Selector = 0;
+                        TitlescreenSelector++;
+                        if (TitlescreenSelector > 4) TitlescreenSelector = 0;
                         break;
                     case SDLK_RETURN:
                     case SDLK_SPACE:
                     case SDLK_KP_ENTER:
-                        switch (Selector){
+                        switch (TitlescreenSelector){
                             case 0:
-                                if (Connected == false){
-                                    Game->Connect(inet_addr("127.0.0.1"), 5000);
-                                }
-                                return m_online;
+                                Refresh();
+                                //if (Connected == false){
+                                //    Game->Connect(inet_addr("127.0.0.1"), 5000);
+                                //}
+                                return m_serverlist;
                             case 1:
                                 return m_authors;
                             case 2:
@@ -87,6 +104,108 @@ MenuState MenuCore::MainLoop(){
 	return m_titlescreen;
 }
 
+
+MenuState MenuCore::ServerlistLoop(){
+    SDL_FillRect(Screen, NULL, SDL_MapRGB(Screen->format, 0,0,0)); // Cleaning screen
+
+    while (SDL_PollEvent(&Event)){
+        switch (Event.type) { // Listening events
+            case SDL_KEYDOWN:
+                switch (Event.key.keysym.sym){
+                    case SDLK_ESCAPE:
+                        NetClose(CSocket);
+                        return m_titlescreen;
+                    // Server selector
+                    case SDLK_UP:
+                        if (ServerSelector > 0) ServerSelector--;
+                        break;
+
+                    case SDLK_DOWN:
+                        if (ServerSelector < MasterserverPacket.servers_count-1) ServerSelector++;
+                        break;
+
+                    case SDLK_LEFT:
+                        if (ServerlistOptionSelector > 0) ServerlistOptionSelector--;
+                        break;
+
+                    case SDLK_RIGHT:
+                        if (ServerlistOptionSelector < 2) ServerlistOptionSelector++;
+                        break;
+                    case SDLK_RETURN:
+                    case SDLK_SPACE:
+                    case SDLK_KP_ENTER:
+                        switch (ServerlistOptionSelector){
+                            printf("ENTER PRESSED, option=%d\n", ServerlistOptionSelector);
+                            case 0:
+                                Refresh();
+                                break;
+                            case 1:
+                                if (Connected == false){
+                                    Game->Connect(MasterserverPacket.servers[ServerSelector].addr.ip, MasterserverPacket.servers[ServerSelector].addr.port);
+                                }
+                                return m_online;
+                            case 2:
+                                return m_titlescreen;
+                        }
+                        break;
+                }
+                break;
+            case SDL_QUIT:
+                return m_exit;
+        }
+    }
+    
+    // Drawing background tiles
+    for (int y=0; y < round(600/MenuBackground->h)*2; y++){
+        for (int x=0; x < round(800/MenuBackground->w)*3; x++){
+            DrawSurface(MenuBackground, BgAnimationCounter+MenuBackground->w*x,MenuBackground->h*y,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+        }
+    }
+    // Drawing servers frame and serverlist if we got servers
+    if (MasterserverPacket.servers_count > 0){
+        DrawSurface(ServerlistFrame, 0,32,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+        for (int i = 0; i < 5; i++){
+            DrawSurface(MenuArrow, 650,108,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));   
+            DrawSurface(ServerlistBar, 77,108+i*50,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawCompressedString(180,108+44+i*50,MasterserverPacket.servers[i+ServerSelector].name,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawCompressedString(77,108+44+i*50,"999",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawCompressedString(566,108+44+i*50,"8",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+        }
+    }
+    else{ // else we draw message
+        DrawSurface(MenuFrame, 0,32,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+        DrawString(70, 208,"SERVERS NOT FOUND",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+        DrawString(65, 272,"TRY PRESS REFRESH BUTTON",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    }
+     
+    // TODO: Add draw button with underline function, because now it looks teriblly
+    switch (ServerlistOptionSelector){
+        case 0:
+            DrawRectangle(50+2, 500+2, 24*7, 6, SDL_MapRGBA(Screen->format, 0, 0, 0, 255));
+            DrawRectangle(50, 500, 24*7, 6, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            break;
+        case 1:
+            DrawRectangle(250+2, 500+2, 24*7, 6, SDL_MapRGBA(Screen->format, 0, 0, 0, 255));
+            DrawRectangle(250, 500, 24*7, 6, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            break;
+        case 2:
+            DrawRectangle(450+2, 500+2, 24*4, 6, SDL_MapRGBA(Screen->format, 0, 0, 0, 255));
+            DrawRectangle(450, 500, 24*4, 6, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            break;
+
+    }
+    // Options
+    DrawString(50, 500,"REFRESH",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawString(250, 500,"CONNECT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawString(450, 500,"EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    
+    BgAnimationCounter-=5;
+    if (BgAnimationCounter <= -MenuBackground->w){
+        BgAnimationCounter = 0;
+    }
+    SDL_Flip(Screen);
+    return m_serverlist;
+}
 
 MenuState MenuCore::AuthorsLoop(){
     SDL_FillRect(Screen, NULL, SDL_MapRGB(Screen->format, 0,0,0)); // Cleaning screen

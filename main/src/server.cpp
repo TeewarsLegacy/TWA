@@ -1,6 +1,4 @@
 /* copyright (c) 2026 mykyta polishyk, see LICENSE file for more info */
-#include "stdio.h"
-
 // Defines
 #define GROUND_CONTROL_SPEED 10.0f
 #define GROUND_FRICTION 0.5f
@@ -17,6 +15,9 @@
 #include "network.h"
 #include "protocol.h"
 
+extern NetAddr MasterserverAddr;
+
+ServerInfo SInfo;
 NetAddr Client;
 NPacket SPacket;
 char buffer[MAX_PACKET_SIZE] = "\0";
@@ -27,13 +28,17 @@ void SendPacket(){
 	NetUDPSend(SSocket, &Client, &SPacket, sizeof(SPacket));
 }
 
-void ServerMain(int Port, char *Map){
+void ServerMain(int Port, char *Map, char *Name){
 	// Configuration of server
 	ServerPort = Port;
 	// Creating server
 	NetInit();
 	SSocket = NetUDPOpen(ServerPort);
 	printf("Server listening on port %d\n",ServerPort);
+	// Sending info about server for masterserver
+	SInfo.players_count = 0;
+	strcpy(SInfo.name, Name);
+    NetUDPSend(SSocket, &MasterserverAddr, &SInfo, sizeof(SInfo));
 	// Loading map
 	LoadMap(&SPacket.current_map, Map);
 	while (true){
