@@ -87,13 +87,48 @@ MenuState MenuCore::MainLoop(){
     }
     // Drawing menu and copyright
     DrawSurface(MenuFrame, 800/2-700/2,140,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-    DrawSurface(MenuCopyright, 0,550,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-    DrawSurface(Banner, 535,383,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-    DrawString(120,250,"PLAY",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-    DrawString(120,285,"ABOUT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-    DrawString(120,320,"HELP",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-    DrawString(120,355,"SETTINGS",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-    DrawString(120,390,"EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawSurface(MenuCopyright, 0,530,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawSurface(Banner, 350,218,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    // Options
+    switch (TitlescreenSelector){
+        case 0:
+            DrawStringWithUnderline(120,250,"PLAY",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(120,285,"ABOUT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(120,320,"HELP",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(120,355,"SETTINGS",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(120,390,"EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            break;
+        case 1:
+            DrawString(120,250,"PLAY",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawStringWithUnderline(120,285,"ABOUT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(120,320,"HELP",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(120,355,"SETTINGS",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(120,390,"EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            break;
+        case 2:
+            DrawString(120,250,"PLAY",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(120,285,"ABOUT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawStringWithUnderline(120,320,"HELP",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(120,355,"SETTINGS",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(120,390,"EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            break;
+        case 3:
+            DrawString(120,250,"PLAY",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(120,285,"ABOUT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(120,320,"HELP",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawStringWithUnderline(120,355,"SETTINGS",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(120,390,"EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            break;
+        case 4:
+            DrawString(120,250,"PLAY",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(120,285,"ABOUT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(120,320,"HELP",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(120,355,"SETTINGS",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawStringWithUnderline(120,390,"EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            break;
+
+    }
+
     // Drawing logo
     DrawAnimatedString(800/2-(32*14)/2,120,"TEEWARS LEGACY",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
     BgAnimationCounter-=5;
@@ -178,26 +213,25 @@ MenuState MenuCore::ServerlistLoop(){
         DrawString(65, 272,"TRY PRESS REFRESH BUTTON",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
     }
      
-    // TODO: Add draw button with underline function, because now it looks teriblly
+    // Options (also can be optimised)
     switch (ServerlistOptionSelector){
         case 0:
-            DrawRectangle(50+2, 500+2, 24*7, 6, SDL_MapRGBA(Screen->format, 0, 0, 0, 255));
-            DrawRectangle(50, 500, 24*7, 6, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawStringWithUnderline(50, 500,"REFRESH",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(250, 500,"CONNECT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(450, 500,"EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             break;
         case 1:
-            DrawRectangle(250+2, 500+2, 24*7, 6, SDL_MapRGBA(Screen->format, 0, 0, 0, 255));
-            DrawRectangle(250, 500, 24*7, 6, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(50, 500,"REFRESH",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawStringWithUnderline(250, 500,"CONNECT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(450, 500,"EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             break;
         case 2:
-            DrawRectangle(450+2, 500+2, 24*4, 6, SDL_MapRGBA(Screen->format, 0, 0, 0, 255));
-            DrawRectangle(450, 500, 24*4, 6, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(50, 500,"REFRESH",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(250, 500,"CONNECT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawStringWithUnderline(450, 500,"EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             break;
 
     }
-    // Options
-    DrawString(50, 500,"REFRESH",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-    DrawString(250, 500,"CONNECT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-    DrawString(450, 500,"EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
     
     BgAnimationCounter-=5;
     if (BgAnimationCounter <= -MenuBackground->w){

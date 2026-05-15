@@ -207,3 +207,18 @@ void DrawAnimatedString(int x, int y, char *string, int color){
     	}
     }
 }
+
+/* Drawing text using text atlas with underline */
+void DrawStringWithUnderline(int x, int y, char *string, int color){
+	// Underline
+    DrawRectangle(x+2+4, y+2, 24*strlen(string), 4, SDL_MapRGBA(Screen->format, 0, 0, 0, 255));  // Shadow for underline
+    DrawRectangle(x+4, y, 24*strlen(string), 4, color);
+    // Text
+    for(int n = 0; n < strlen(string); n++){
+    	for (int i = 0; i < strlen(TextFromTileset); i++){
+    		if (TextFromTileset[i] == string[n]){
+				DrawAnimationSurface(TextTileset, x + n * 24, y, color, 36, i+1);
+    		}
+    	}
+    }
+}

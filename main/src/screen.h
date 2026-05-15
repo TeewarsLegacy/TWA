@@ -79,4 +79,5 @@ int StringLength(); // Return length of string in pixels
 void DrawString(int x, int y, char *string, int color); // Drawing text using text atlas
 void DrawCompressedString(int x, int y, char *string, int color); // Drawing compressed text using text atlas
 void DrawAnimatedString(int x, int y, char *string, int color); // Drawing text using text atlas with cool effect
+void DrawStringWithUnderline(int x, int y, char *string, int color); // Drawing text using text atlas with underline
 #endif
