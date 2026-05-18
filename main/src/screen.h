@@ -56,7 +56,7 @@ enum{ // Weapons tileset
 enum{ // Health tileset
 	health1=1,
 	health5,
-	healht10
+	health10
 };
 
 enum{ // Armor tileset

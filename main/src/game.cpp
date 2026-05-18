@@ -39,24 +39,27 @@ MenuState GameCore::Loop(){
                     case SDLK_ESCAPE:
                         Connected=false;
                         return m_titlescreen;
-                    case SDLK_LEFT:
-                        xpos++;
-                        break;
-                    case SDLK_RIGHT:
-                        xpos--;
-                        break;
-                    case SDLK_UP:
-                        ypos++; 
-                        break;
-                    case SDLK_DOWN:
-                        ypos--;
-                        break;
-                }
-                break;
+        			}
+        		break;
             case SDL_QUIT:
                 return m_exit;
         }
     }
+    // Smooth control
+    Uint8* CurrentKeyStates = SDL_GetKeyState(NULL);    
+
+	if (CurrentKeyStates[SDLK_LEFT]) {
+	    xpos++;
+	}
+	if (CurrentKeyStates[SDLK_RIGHT]) {
+	    xpos--;
+	}
+	if (CurrentKeyStates[SDLK_UP]) {
+	    ypos++;
+	}
+	if (CurrentKeyStates[SDLK_DOWN]) {
+	    ypos--;
+	}
     DrawMap(xpos, ypos, &CPacket.current_map);
     DrawClouds();
 	SDL_Flip(Screen);

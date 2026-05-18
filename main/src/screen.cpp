@@ -151,12 +151,43 @@ void DrawMap(int x, int y, Map *object){
             count = 0; // reseting counter
         }
     }
-	// Draw objects
+	// Draw objects with different sprites
 	for(int i=0;i<object->objects_n;i++){
 		switch (object->objects[i].type){
-			
+			case SPAWN:
+				break;
+			case WEAPON_GUN:
+				DrawAnimationSurface(WeaponsTilesetRight, object->objects[i].x + x + sin(SDL_GetTicks()/500.0f)*5, object->objects[i].y + y + sin(SDL_GetTicks()/250.0f)*5, SDL_MapRGBA(Screen->format, 255, 255, 255, 255),4,gun);
+				break;
+			case WEAPON_SHOTGUN:
+				DrawAnimationSurface(WeaponsTilesetRight, object->objects[i].x + x + sin(SDL_GetTicks()/500.0f)*5, object->objects[i].y + y + sin(SDL_GetTicks()/250.0f)*5, SDL_MapRGBA(Screen->format, 255, 255, 255, 255),4,shotgun);
+				break;
+			case WEAPON_RIFLE:
+				DrawAnimationSurface(WeaponsTilesetRight, object->objects[i].x + x + sin(SDL_GetTicks()/500.0f)*5, object->objects[i].y + y + sin(SDL_GetTicks()/250.0f)*5, SDL_MapRGBA(Screen->format, 255, 255, 255, 255),4,rifle);
+				break;
+			case WEAPON_GRENADE:
+				DrawAnimationSurface(WeaponsTilesetRight, object->objects[i].x + x + sin(SDL_GetTicks()/500.0f)*5, object->objects[i].y + y + sin(SDL_GetTicks()/250.0f)*5, SDL_MapRGBA(Screen->format, 255, 255, 255, 255),4,grenade);
+				break;
+			case ARMOR_1:
+				DrawAnimationSurface(ArmorTileset, object->objects[i].x + x + sin(SDL_GetTicks()/500.0f)*5, object->objects[i].y + y + sin(SDL_GetTicks()/250.0f)*5, SDL_MapRGBA(Screen->format, 255, 255, 255, 255),3,1);
+				break;
+			case ARMOR_5:
+				DrawAnimationSurface(ArmorTileset, object->objects[i].x + x + sin(SDL_GetTicks()/500.0f)*5, object->objects[i].y + y + sin(SDL_GetTicks()/250.0f)*5, SDL_MapRGBA(Screen->format, 255, 255, 255, 255),3,2);
+				break;
+			case ARMOR_10:
+				DrawAnimationSurface(ArmorTileset, object->objects[i].x + x + sin(SDL_GetTicks()/500.0f)*5, object->objects[i].y + y + sin(SDL_GetTicks()/250.0f)*5, SDL_MapRGBA(Screen->format, 255, 255, 255, 255),3,3);
+				break;
+			case HEALTH_1:
+				DrawAnimationSurface(HealthTileset, object->objects[i].x + x + sin(SDL_GetTicks()/500.0f)*5, object->objects[i].y + y + sin(SDL_GetTicks()/250.0f)*5, SDL_MapRGBA(Screen->format, 255, 255, 255, 255),3,1);
+				break;
+			case HEALTH_5:
+				DrawAnimationSurface(HealthTileset, object->objects[i].x + x + sin(SDL_GetTicks()/500.0f)*5, object->objects[i].y + y + sin(SDL_GetTicks()/250.0f)*5, SDL_MapRGBA(Screen->format, 255, 255, 255, 255),3,2);
+				break;
+			case HEALTH_10:
+				DrawAnimationSurface(HealthTileset, object->objects[i].x + x + sin(SDL_GetTicks()/500.0f)*5, object->objects[i].y + y + sin(SDL_GetTicks()/250.0f)*5, SDL_MapRGBA(Screen->format, 255, 255, 255, 255),3,3);
+				break;
 		}
-		DrawAnimationSurface(TeeTilesetLeft, object->objects[i].x + x, object->objects[i].y + y, SDL_MapRGBA(Screen->format, 255, 255, 255, 255),4,1);
+		
 	}
 }
 
