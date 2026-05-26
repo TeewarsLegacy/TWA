@@ -31,6 +31,8 @@ SDL_Surface *ServerlistBar;
 SDL_Surface *Banner;
 // Text tileset
 SDL_Surface *TextTileset;
+// Cursor
+SDL_Surface *Cursor;
 
 char TextFromTileset[37] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -51,6 +53,7 @@ void LoadSprites(){
 	ServerlistBar = LoadTexture("data/serverlist_bar.png");
 	Banner = LoadTexture("data/banner.png");
 	TextTileset = LoadTexture("data/text.png");
+	Cursor = LoadTexture("data/cursor.png");
 }
 
 /* Draw rectange with size and color */

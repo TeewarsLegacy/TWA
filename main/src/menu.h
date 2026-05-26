@@ -25,6 +25,7 @@ private:
     int ServerlistOptionSelector = 0;
     NMSPacket MasterserverPacket;
     NetAddr Masterserver;
+    int MouseX, MouseY; // TODO: Move cursor draw into function DrawCursor
 };
 
 #endif

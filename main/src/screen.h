@@ -38,6 +38,8 @@ extern SDL_Surface *ServerlistBar;
 extern SDL_Surface *Banner;
 // Text tileset
 extern SDL_Surface *TextTileset; // This have 36 frames
+// Cursor
+extern SDL_Surface *Cursor;
 
 enum{ // Tee tileset
 	tee_idle=1,

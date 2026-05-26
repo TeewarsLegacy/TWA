@@ -9,13 +9,14 @@
 
 /* Network input struct */
 struct NInput{
-	int left;
-	int right;
-	int angle;
-	int jump;
-	int fire;
-	int hook;
-	int active_weapon;
+	// For all of these value from 0 to 1 (boolean)
+	int left=0;
+	int right=0;
+	int angle=0;
+	int jump=0;
+	int fire=0;
+	int hook=0;
+	int active_weapon=0; // only 0-3 value
 };
 
 /* Network player entity */
