@@ -4,6 +4,7 @@
 #include "audio.h"
 #include "game.h"
 #include "network.h"
+#include "types.h"
 #include "stdio.h"
 #include "string.h"
 #include "cmath"
@@ -297,14 +298,27 @@ MenuState MenuCore::HelpLoop(){
             DrawSurface(MenuBackground, BgAnimationCounter+MenuBackground->w*x,MenuBackground->h*y,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
         }
     }
-    // Drawing info 
-    // TODO: Add more info about game
-    DrawString(0,50,"USE A AND D KEYS FOR MOVE",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    // Drawing info with different icons
+    DrawString(0,50,"USE A AND D KEYS TO MOVE",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawTee(24*24 + TeeTilesetLeft->w/2,50, walk_left, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
     DrawString(0,100,"USE SPACE FOR JUMPING",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-    DrawString(0,150,"USE LEFT MOUSE BUTTON",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-    DrawString(0,182,"FOR SHOOTING",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-    DrawString(0,232,"USE RIGHT MOUSE BUTTON",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-    DrawString(0,264,"FOR HOOK",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawTee(21*24 + TeeTilesetLeft->w/2,100, fall_left, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawString(0,150,"USE LEFT MOUSE BUTTON TO SHOOT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawAnimationSurface(WeaponsTilesetRight, 30*24 + WeaponsTilesetRight->w/3,150, SDL_MapRGBA(Screen->format, 255, 255, 255, 255), 4, shotgun);
+    DrawString(0,200,"USE RIGHT MOUSE BUTTON TO HOOK",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawString(0,250,"USE MOUSE WHEEL OR FOLOWING KEYS",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawString(0,280,"TO SELECT WEAPONS",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+
+    // Drawing info about weapons
+    DrawStringWithUnderline(10,330,"1",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawAnimationSurface(WeaponsTilesetRight, 32 - WeaponsTilesetRight->w/2,370, SDL_MapRGBA(Screen->format, 255, 255, 255, 255), 4, gun);
+    DrawStringWithUnderline(60,330,"2",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawAnimationSurface(WeaponsTilesetRight, 32+50 - WeaponsTilesetRight->w/2,370, SDL_MapRGBA(Screen->format, 255, 255, 255, 255), 4, shotgun);
+    DrawStringWithUnderline(110,330,"3",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawAnimationSurface(WeaponsTilesetRight, 32+100 - WeaponsTilesetRight->w/2,370, SDL_MapRGBA(Screen->format, 255, 255, 255, 255), 4, grenade);
+    DrawStringWithUnderline(160,330,"4",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawAnimationSurface(WeaponsTilesetRight, 32+150 - WeaponsTilesetRight->w/2,370, SDL_MapRGBA(Screen->format, 255, 255, 255, 255), 4, rifle);
+
     BgAnimationCounter-=5;
     if (BgAnimationCounter <= -MenuBackground->w){
         BgAnimationCounter = 0;
@@ -312,6 +326,9 @@ MenuState MenuCore::HelpLoop(){
 
     // Drawing cursor
     DrawSurface(Cursor, MouseX-50/2,MouseY-50/2,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+
+    // Drawing message
+    DrawString(120,568,"PRESS ANY KEY TO EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 
     SDL_Flip(Screen);
     return m_help;
