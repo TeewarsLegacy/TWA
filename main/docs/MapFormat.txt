@@ -10,6 +10,8 @@ Here is samples of TWLM syntax:
 
 object <Object name> - Adding object in map
 
+deco <Decoration number> - Adding decoration on map
+
 point - Adding vertex on map
 
 break - Stop draw polygon with vertex, and switching to another
@@ -33,3 +35,10 @@ ARMOR_10 - Armor giver (and it gives 10 armor points)
 HEALTH_1 - Health giver (and it gives 1 health point)
 HEALTH_5 - Health giver (and it gives 5 health points)
 HEALTH_10 - Health giver (and it gives 10 health points)
+------------
+DECORATIONS
+------------
+1 - Grass
+2 - Chain
+3 - Big tree
+4 - Small tree

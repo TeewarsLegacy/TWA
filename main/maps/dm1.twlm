@@ -25,6 +25,15 @@ point
 x 0 
 y 2
 break
+deco 1
+x 0
+y 5
+deco 1
+x 3
+y 5
+deco 3
+x 0
+y 2
 point
 x 8
 y 2

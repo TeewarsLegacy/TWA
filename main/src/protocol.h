@@ -43,13 +43,21 @@ struct MapObject{
 	int type;
 };
 
+/* Map decoration like tree, grass and etc */
+struct MapDeco{
+	int x,y;
+	int type;
+};
+
 /* Map structure */
 struct Map{
 	// Count of objects
 	int vertices_n;
 	int objects_n;
+	int decorations_n;
 	MapVertex vertices[1024];
 	MapObject objects[64];
+	MapDeco decorations[128];
 };
 
 /* Network packet object */

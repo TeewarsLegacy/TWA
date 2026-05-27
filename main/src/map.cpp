@@ -23,7 +23,9 @@ void LoadMap(Map *object, const char* map_name){
     int line_number = 0;
     int n_vertex = 0;
     int n_objects = 0;
+    int n_decorations = 0;
     bool is_object = false;
+    bool is_decoration = false;
     // Reading lines
 	while (fgets(line_buffer, sizeof(line_buffer), file_pointer)) {
         printf("Line: %s", line_buffer);
@@ -31,9 +33,11 @@ void LoadMap(Map *object, const char* map_name){
         if (line_buffer[0] != ';'){ // If it tip we skip check
             if (strncmp(line_buffer, "point", 5) == 0) {
                 is_object = false;
+                is_decoration = false;
             }
             if (strncmp(line_buffer, "object", 6) == 0) {
                 is_object = true;
+                is_decoration = false;
                 // Selection of object type
                 if (strncmp(line_buffer + 7, "SPAWN" , 5) == 0){
                     object->objects[n_objects].type = SPAWN;
@@ -69,11 +73,20 @@ void LoadMap(Map *object, const char* map_name){
                     object->objects[n_objects].type = HEALTH_10;
                 }
             }
+            if (strncmp(line_buffer, "deco", 4) == 0) {
+                is_object = false;
+                is_decoration = true;
+                // Selection of decoration type
+                object->decorations[n_decorations].type = atof(line_buffer + 4);
+            }
             // Parsing position of it
             if (line_buffer[0] == 'x') {
                 // If it object writing into object massive, else writing into vertices
                 if (is_object == true){
                     object->objects[n_objects].x = round(atof(line_buffer + 1)*32);
+                }
+                else if (is_decoration == true){
+                    object->decorations[n_decorations].x = round(atof(line_buffer + 1)*32);
                 }
                 else{
                     object->vertices[n_vertex].x = round(atof(line_buffer + 1)*32);
@@ -84,6 +97,10 @@ void LoadMap(Map *object, const char* map_name){
                 if (is_object == true){
                     object->objects[n_objects].y = round(atof(line_buffer + 1)*32);
                     n_objects++;
+                }
+                else if (is_decoration == true){
+                    object->decorations[n_decorations].y = round(atof(line_buffer + 1)*32);
+                    n_decorations++;
                 }
                 else{
                     object->vertices[n_vertex].y = round(atof(line_buffer + 1)*32);
@@ -99,5 +116,6 @@ void LoadMap(Map *object, const char* map_name){
     // Cloning info about vertices into object
     object->vertices_n = n_vertex;
     object->objects_n = n_objects;
+    object->decorations_n = n_decorations;
     fclose(file_pointer);
 }

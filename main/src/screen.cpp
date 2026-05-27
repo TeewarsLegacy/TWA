@@ -34,7 +34,7 @@ SDL_Surface *TextTileset;
 // Mouse cursor
 SDL_Surface *Cursor;
 // Map decorations
-SDL_Surface *Decorations;
+SDL_Surface *DecorationsTileset;
 
 char TextFromTileset[37] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -56,7 +56,7 @@ void LoadSprites(){
 	Banner = LoadTexture("data/banner.png");
 	TextTileset = LoadTexture("data/text.png");
 	Cursor = LoadTexture("data/cursor.png");
-	Decorations = LoadTexture("data/decorations.png");
+	DecorationsTileset = LoadTexture("data/decorations.png");
 }
 
 /* Draw rectange with size and color */
@@ -157,6 +157,23 @@ void DrawMap(int x, int y, Map *object){
             count = 0; // reseting counter
         }
     }
+    // Draw objects with different sprites
+	for(int i=0;i<object->decorations_n;i++){
+		switch (object->decorations[i].type){
+			case 1:
+				DrawAnimationSurface(DecorationsTileset, object->decorations[i].x + x, object->decorations[i].y + y, SDL_MapRGBA(Screen->format, 255, 255, 255, 255),4,1);
+				break;
+			case 2:
+				DrawAnimationSurface(DecorationsTileset, object->decorations[i].x + x, object->decorations[i].y + y, SDL_MapRGBA(Screen->format, 255, 255, 255, 255),4,2);
+				break;
+			case 3:
+				DrawAnimationSurface(DecorationsTileset, object->decorations[i].x + x, object->decorations[i].y + y, SDL_MapRGBA(Screen->format, 255, 255, 255, 255),4,3);
+				break;
+			case 4:
+				DrawAnimationSurface(DecorationsTileset, object->decorations[i].x + x, object->decorations[i].y + y, SDL_MapRGBA(Screen->format, 255, 255, 255, 255),4,4);
+				break;
+		}
+	}
 	// Draw objects with different sprites
 	for(int i=0;i<object->objects_n;i++){
 		switch (object->objects[i].type){
@@ -193,7 +210,6 @@ void DrawMap(int x, int y, Map *object){
 				DrawAnimationSurface(HealthTileset, object->objects[i].x + x + sin(SDL_GetTicks()/500.0f)*5, object->objects[i].y + y + sin(SDL_GetTicks()/250.0f)*5, SDL_MapRGBA(Screen->format, 255, 255, 255, 255),3,3);
 				break;
 		}
-		
 	}
 }
 

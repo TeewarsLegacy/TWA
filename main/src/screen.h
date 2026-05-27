@@ -41,7 +41,7 @@ extern SDL_Surface *TextTileset; // This have 36 frames
 // Mouse cursor
 extern SDL_Surface *Cursor;
 // Map decorations
-extern SDL_Surface *Decorations;
+extern SDL_Surface *DecorationsTileset;
 
 enum{ // Tee tileset
 	tee_idle=1,
