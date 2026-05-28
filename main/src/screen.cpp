@@ -225,7 +225,7 @@ void DrawClouds(){
             n = 1;
         }
         // Drawing surface
-        DrawAnimationSurface(CloudsTileset, i*128, 60-sin(SDL_GetTicks()/500.0f)*5*n, SDL_MapRGBA(Screen->format, 255, 255, 255, 255), 2, 1+i%2);
+        DrawAnimationSurface(CloudsTileset, i*128, 120-sin(SDL_GetTicks()/500.0f)*5*n, SDL_MapRGBA(Screen->format, 255, 255, 255, 255), 2, 1+i%2);
     }
 }
 
