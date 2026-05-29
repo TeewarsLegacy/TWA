@@ -33,10 +33,9 @@ void GameCore::NetworkLoop(){
 }
 
 MenuState GameCore::Loop(){
-	SDL_FillRect(Screen, NULL, SDL_MapRGB(Screen->format, 120,120,255)); // Cleaning screen
+	SDL_FillRect(Screen, NULL, SDL_MapRGB(Screen->format, 86,137,255)); // Cleaning screen
 
     while (SDL_PollEvent(&Event)){
-        SDL_GetMouseState(&MouseX, &MouseY);
         switch (Event.type) { // Listening events
             case SDL_KEYDOWN:
                 switch (Event.key.keysym.sym){
@@ -101,8 +100,8 @@ MenuState GameCore::Loop(){
 	if (CurrentKeyStates[SDLK_DOWN]) {
 	    ypos--;
 	}
+    DrawBackground(xpos/2, ypos-150);
     DrawMap(xpos, ypos, &CPacket.current_map);
-    DrawClouds();
     // Debug hud
     char buf[64];
 	sprintf(buf, "LEFT %d", CInput.left);
@@ -120,9 +119,8 @@ MenuState GameCore::Loop(){
 	sprintf(buf, "ACTIVE_WEAPON %d", CInput.active_weapon);
     DrawString(0,350,buf,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 
-    // Drawing cursor
-    DrawSurface(Cursor, MouseX-50/2,MouseY-50/2,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-
+    DrawCursor();
+    
 	SDL_Flip(Screen);
 	return m_online;
 }

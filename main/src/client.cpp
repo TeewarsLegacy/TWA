@@ -25,6 +25,8 @@ MenuCore *Menu;
 
 Mix_Music *Music;
 
+int MouseX, MouseY;
+
 int CSocket;
 
 bool Connected = false;
@@ -72,7 +74,10 @@ void ClientMain(){
 	// Playing music
 	PlayMusic();
 
+	// Mainloop
 	while (true){
+		// Updating cursor
+        SDL_GetMouseState(&MouseX, &MouseY);
 		switch (state){
 			case m_titlescreen:
 				state = Menu->MainLoop();

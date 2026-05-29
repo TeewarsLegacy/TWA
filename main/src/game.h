@@ -19,7 +19,6 @@ private:
     NetAddr Server;
 	NPacket CPacket;
 	NInput CInput;
-    int MouseX, MouseY; // TODO: Move cursor draw into function DrawCursor
 };
 
 #endif

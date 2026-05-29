@@ -3,6 +3,7 @@
 object WEAPON_GUN
 x 0
 y 2
+; Small island
 point 
 x 0
 y 2
@@ -25,6 +26,7 @@ point
 x 0 
 y 2
 break
+; Small island decoration
 deco 1
 x 0
 y 5

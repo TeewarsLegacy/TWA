@@ -40,7 +40,6 @@ MenuState MenuCore::MainLoop(){
 	SDL_FillRect(Screen, NULL, SDL_MapRGB(Screen->format, 0,0,0)); // Cleaning screen
 
 	while (SDL_PollEvent(&Event)){
-        SDL_GetMouseState(&MouseX, &MouseY);
         switch (Event.type) { // Listening events
             case SDL_KEYDOWN:
                 switch (Event.key.keysym.sym){
@@ -137,9 +136,9 @@ MenuState MenuCore::MainLoop(){
     if (BgAnimationCounter <= -MenuBackground->w){
         BgAnimationCounter = 0;
     }
-    // Drawing cursor
-    DrawSurface(Cursor, MouseX-50/2,MouseY-50/2,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 
+    DrawCursor();
+    
 	SDL_Flip(Screen);
 	return m_titlescreen;
 }
@@ -149,7 +148,6 @@ MenuState MenuCore::ServerlistLoop(){
     SDL_FillRect(Screen, NULL, SDL_MapRGB(Screen->format, 0,0,0)); // Cleaning screen
 
     while (SDL_PollEvent(&Event)){
-        SDL_GetMouseState(&MouseX, &MouseY);
         switch (Event.type) { // Listening events
             case SDL_KEYDOWN:
                 switch (Event.key.keysym.sym){
@@ -244,8 +242,7 @@ MenuState MenuCore::ServerlistLoop(){
         BgAnimationCounter = 0;
     }
 
-    // Drawing cursor
-    DrawSurface(Cursor, MouseX-50/2,MouseY-50/2,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawCursor();
 
     SDL_Flip(Screen);
     return m_serverlist;
@@ -255,7 +252,6 @@ MenuState MenuCore::AuthorsLoop(){
     SDL_FillRect(Screen, NULL, SDL_MapRGB(Screen->format, 0,0,0)); // Cleaning screen
 
     while (SDL_PollEvent(&Event)){
-        SDL_GetMouseState(&MouseX, &MouseY);
         switch (Event.type) { // Listening events
             case SDL_KEYDOWN:
                 return m_titlescreen;
@@ -273,9 +269,8 @@ MenuState MenuCore::AuthorsLoop(){
     // Drawing message
     DrawString(120,568,"PRESS ANY KEY TO EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 
-    // Drawing cursor
-    DrawSurface(Cursor, MouseX-50/2,MouseY-50/2,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-
+    DrawCursor();
+    
     SDL_Flip(Screen);
     return m_authors;
 }
@@ -284,7 +279,6 @@ MenuState MenuCore::HelpLoop(){
     SDL_FillRect(Screen, NULL, SDL_MapRGB(Screen->format, 0,0,0)); // Cleaning screen
 
     while (SDL_PollEvent(&Event)){
-        SDL_GetMouseState(&MouseX, &MouseY);
         switch (Event.type) { // Listening events
             case SDL_KEYDOWN:
                 return m_titlescreen;
@@ -324,9 +318,8 @@ MenuState MenuCore::HelpLoop(){
         BgAnimationCounter = 0;
     }
 
-    // Drawing cursor
-    DrawSurface(Cursor, MouseX-50/2,MouseY-50/2,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-
+    DrawCursor();
+    
     // Drawing message
     DrawString(120,568,"PRESS ANY KEY TO EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 

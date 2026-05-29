@@ -42,6 +42,8 @@ extern SDL_Surface *TextTileset; // This have 36 frames
 extern SDL_Surface *Cursor;
 // Map decorations
 extern SDL_Surface *DecorationsTileset;
+// Mountians
+extern SDL_Surface *Mountians;
 
 enum{ // Tee tileset
 	tee_idle=1,
@@ -76,12 +78,13 @@ SDL_Surface* LoadTexture(char *path); // Load texture into surface
 void DrawSurface(SDL_Surface *surface, int x, int y, int color); // Draw surface with size and color
 void DrawAnimationSurface(SDL_Surface *surface, int x, int y, int color, int numofframes, int frame); // Drawing surface, but with frame animation (Can be helpfull in animations)
 // Game GFX functions
-void DrawTee(int x, int y, PlayerState state, int color); // Drawing player with color, and animation
+void DrawTee(int x, int y, PlayerState state, int color); // Drawing player with animation
 void DrawMap(int x, int y, Map *object); // Draw map with game objects (like pickups and etc)
-void DrawClouds(); // Drawing fully animated clouds
+void DrawBackground(int offsetx, int offsety); // Drawing clouds and mountians with paralax
 int StringLength(); // Return length of string in pixels
 void DrawString(int x, int y, char *string, int color); // Drawing text using text atlas
 void DrawCompressedString(int x, int y, char *string, int color); // Drawing compressed text using text atlas
 void DrawAnimatedString(int x, int y, char *string, int color); // Drawing text using text atlas with cool effect
 void DrawStringWithUnderline(int x, int y, char *string, int color); // Drawing text using text atlas with underline
+void DrawCursor(); // Drawing cursor
 #endif

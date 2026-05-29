@@ -3,6 +3,7 @@
 
 // Global objects
 extern SDL_Surface *Screen;
+extern int MouseX, MouseY;
 
 // Tees tileset
 SDL_Surface *TeeTilesetLeft;
@@ -35,6 +36,8 @@ SDL_Surface *TextTileset;
 SDL_Surface *Cursor;
 // Map decorations
 SDL_Surface *DecorationsTileset;
+// Mountians
+SDL_Surface *Mountians;
 
 char TextFromTileset[37] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -57,6 +60,7 @@ void LoadSprites(){
 	TextTileset = LoadTexture("data/text.png");
 	Cursor = LoadTexture("data/cursor.png");
 	DecorationsTileset = LoadTexture("data/decorations.png");
+	Mountians = LoadTexture("data/mountians.png");
 }
 
 /* Draw rectange with size and color */
@@ -214,18 +218,38 @@ void DrawMap(int x, int y, Map *object){
 }
 
 /* Drawing fully animated clouds */
-void DrawClouds(){
-    for (int i=0; i<(800/128)+1; i++){
-        int n;
-        // Selection of sinus direction
-        if (i%2 == 0){
-            n = -1;
-        }
-        else{
-            n = 1;
-        }
-        // Drawing surface
-        DrawAnimationSurface(CloudsTileset, i*128, 120-sin(SDL_GetTicks()/500.0f)*5*n, SDL_MapRGBA(Screen->format, 255, 255, 255, 255), 2, 1+i%2);
+void DrawBackground(int offsetx, int offsety){
+	// Drawing mountians
+	DrawSurface(Mountians, 0, 200, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+
+    // Very buggy cloud code
+	int Distance = 300;
+    int worldWidth = 1600;
+    for (int i = 0; i < worldWidth / Distance + 3; i++)
+    {
+        int baseX = i * Distance;
+
+        float x1 = baseX - offsetx * 0.6f;
+        float y1 = 140 + sin((SDL_GetTicks() / 800.0f) + i * 2) * 6 + offsety;
+
+        if (x1 < -200) x1 += worldWidth;
+        if (x1 > worldWidth) x1 -= worldWidth;
+
+        DrawAnimationSurface(
+            CloudsTileset,
+            x1, y1,
+            SDL_MapRGBA(Screen->format, 255, 255, 255, 255),
+            2,
+            1
+        );
+
+        DrawAnimationSurface(
+            CloudsTileset,
+            x1 - worldWidth, y1,
+            SDL_MapRGBA(Screen->format, 255, 255, 255, 255),
+            2,
+            1
+        );
     }
 }
 
@@ -274,4 +298,9 @@ void DrawStringWithUnderline(int x, int y, char *string, int color){
     		}
     	}
     }
+}
+
+/* Drawing cursor  */
+void DrawCursor(){
+	DrawSurface(Cursor, MouseX-50/2,MouseY-50/2,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 }
