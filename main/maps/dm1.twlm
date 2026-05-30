@@ -33,9 +33,17 @@ y 5
 deco 1
 x 3
 y 5
+; Tree
 deco 3
-x 0
+x 2
 y 2
+deco 2
+x -1
+y 2
+deco 2
+x 4
+y 2
+; Bigger island
 point
 x 8
 y 2
@@ -70,6 +78,35 @@ point
 x 8
 y 2
 break
+; Bigger island decorations
+deco 1
+x 8
+y 4
+deco 1
+x 11
+y 4
+deco 1
+x 14
+y 4
+deco 1
+x 17
+y 4
+deco 1
+x 20
+y 4
+; Trees
+deco 3
+x 18
+y 1
+deco 4
+x 12
+y 1
+deco 2
+x 7
+y 1
+deco 2
+x 21
+y 1
 point
 x 4
 y 8
@@ -125,3 +162,48 @@ point
 x 4
 y 8
 break
+; Biggest island decorations
+deco 1
+x 5
+y 10
+deco 1
+x 8
+y 10
+deco 1
+x 11
+y 10
+deco 1
+x 14
+y 10
+deco 1
+x 17
+y 10
+deco 1
+x 19
+y 10
+; Game objects
+object HEALTH_1
+x 7
+y 12
+object HEALTH_1
+x 6
+y 11
+object HEALTH_1
+x 8
+y 11
+object HEALTH_1
+x 7
+y 10
+object ARMOR_5
+x 7
+y 11
+
+object HEALTH_1
+x 8
+y 6
+object WEAPON_SHOTGUN
+x 13
+y 6
+object HEALTH_1
+x 18
+y 6

@@ -33,7 +33,7 @@ void GameCore::NetworkLoop(){
 }
 
 MenuState GameCore::Loop(){
-	SDL_FillRect(Screen, NULL, SDL_MapRGB(Screen->format, 86,137,255)); // Cleaning screen
+	SDL_FillRect(Screen, NULL, SDL_MapRGB(Screen->format, 105,138,214)); // Cleaning screen
 
     while (SDL_PollEvent(&Event)){
         switch (Event.type) { // Listening events
@@ -103,7 +103,7 @@ MenuState GameCore::Loop(){
     DrawBackground(xpos/2, ypos-150);
     DrawMap(xpos, ypos, &CPacket.current_map);
     // Debug hud
-    char buf[64];
+   /*char buf[64];
 	sprintf(buf, "LEFT %d", CInput.left);
 	DrawString(0, 50, buf, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 	sprintf(buf, "RIGHT %d", CInput.right);
@@ -117,7 +117,7 @@ MenuState GameCore::Loop(){
 	sprintf(buf, "HOOK %d", CInput.hook);
     DrawString(0,300,buf,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 	sprintf(buf, "ACTIVE_WEAPON %d", CInput.active_weapon);
-    DrawString(0,350,buf,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawString(0,350,buf,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));*/
 
     DrawCursor();
     
