@@ -53,7 +53,11 @@ int NetUDPSend(int sock, NetAddr *addr, const void *data, int size) // Sending d
 int NetUDPRecv(int sock, NetAddr *addr, void *buffer, int maxsize)
 {
     struct sockaddr_in a;
+    #ifdef _WIN32
+    int len = sizeof(a);
+    #else
     socklen_t len = sizeof(a);
+    #endif
 
     int r = recvfrom(sock, buffer, maxsize, 0,
                      (struct sockaddr*)&a, &len);
