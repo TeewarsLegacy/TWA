@@ -31,10 +31,36 @@ int CSocket;
 
 bool Connected = false;
 
+GamePreferences Pref;
+
+void LoadPreferences(){
+	FILE *file_pointer;
+	// Loading preferences file
+    file_pointer = fopen("twl.pref", "r");
+
+    if (file_pointer == NULL) {
+		fprintf(stderr, "Save file is not detected");
+
+        file_pointer = fopen("twl.pref", "w");
+        // If we dont find settings file we write new
+		fwrite(&Pref, sizeof(GamePreferences), 1, file_pointer);
+
+    } else {
+    	// Else we loading data from from this file
+        fread(&Pref, sizeof(GamePreferences), 1, file_pointer);
+    }
+
+    // Closing file
+    fclose(file_pointer);
+}
+
 void ClientMain(){
 	// Initialization of objects
 	Game = new GameCore(); 
-	Menu = new MenuCore(); 
+	Menu = new MenuCore();
+
+	// Loading settings
+	LoadPreferences();
 
 	MenuState state=m_titlescreen;
 	// Initialization of SDL

@@ -3,7 +3,7 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-// Menu state
+/* Menu state */
 enum MenuState{
 	m_titlescreen=0,
 	m_serverlist, // Servers list
@@ -14,7 +14,7 @@ enum MenuState{
 	m_exit // Exit from game
 };
 
-// Player state
+/* Player state */
 enum PlayerState{
 	walk_left = 0,
 	walk_right,
@@ -22,6 +22,14 @@ enum PlayerState{
 	idle_right,
 	fall_left,
 	fall_right
+};
+
+/* Game settings structure */
+struct GamePreferences{
+	char name[32] = "Nameless tee";
+	char clan[32] = "No clan";
+	int volume=0;
+	bool fullscreen=false;
 };
 
 #endif

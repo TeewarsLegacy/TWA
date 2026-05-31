@@ -1,12 +1,13 @@
 Teewars Legacy
 ----------------------
 What is Teewars legacy
-	Teewars Legacy - inspired by teeworlds game made in 2000s opensource style with 2000s 
-	technologies like SDL 1.2, SDL_mixer 1.2.
+	Teewars Legacy - inspired by teeworlds game made in 2000s indie opensource games style (Like pingus, hedgewars, etc) 
+	with 2000s technologies like SDL 1.2, SDL_mixer 1.2.
 Features of project
 - Oldschool sources structure like in 2000s games
 - Oldschool pixelated GFX like in 2000s games
 - Vector based map like in old Beta Teewars from 2003-2004
+- 2 Maps
 Recources
 	TWL Website - https://teewarslegacy.com.ua/
 ----------------------
