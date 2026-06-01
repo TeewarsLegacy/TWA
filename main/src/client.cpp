@@ -90,7 +90,12 @@ void ClientMain(){
 	// Loading data
 	LoadSprites();
 	// Creating window
-	Screen = SDL_SetVideoMode(800, 600, 32, SDL_SWSURFACE);
+	if (Pref.fullscreen == true){
+		Screen = SDL_SetVideoMode(800, 600, 32, SDL_SWSURFACE | SDL_FULLSCREEN);
+	}
+	else {
+		Screen = SDL_SetVideoMode(800, 600, 32, SDL_SWSURFACE);
+	}
 	// Cloning game version into caption
 	char WindowCaption[86];
 	strcpy(WindowCaption, "Teewars legacy milestone ");
@@ -117,6 +122,9 @@ void ClientMain(){
 				break;
 			case m_help:
 				state = Menu->HelpLoop();
+				break;
+			case m_settings:
+				state = Menu->SettingsLoop();
 				break;
 			case m_serverlist:
 				Menu->NetworkLoop();

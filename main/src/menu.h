@@ -16,6 +16,7 @@ public:
 	MenuState AuthorsLoop();
 	MenuState HelpLoop();
 	MenuState ServerlistLoop();
+    MenuState SettingsLoop();
 private:
 	SDL_Event Event;
     int BgAnimationCounter;

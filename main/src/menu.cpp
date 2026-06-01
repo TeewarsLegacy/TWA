@@ -15,6 +15,7 @@ extern GameCore *Game;
 extern bool Connected;
 extern int CSocket;
 extern NetAddr MasterserverAddr;
+extern GamePreferences Pref;
 
 MenuCore::MenuCore(){
     BgAnimationCounter = 0;
@@ -69,6 +70,8 @@ MenuState MenuCore::MainLoop(){
                                 return m_authors;
                             case 2:
                                 return m_help;
+                            case 3:
+                                return m_settings;
                             case 4:
                                 return m_exit;
                         }
@@ -325,4 +328,39 @@ MenuState MenuCore::HelpLoop(){
 
     SDL_Flip(Screen);
     return m_help;
+}
+
+MenuState MenuCore::SettingsLoop(){
+    SDL_FillRect(Screen, NULL, SDL_MapRGB(Screen->format, 0,0,0)); // Cleaning screen
+
+    while (SDL_PollEvent(&Event)){
+        switch (Event.type) { // Listening events
+            case SDL_KEYDOWN:
+                return m_titlescreen;
+                break;
+            case SDL_QUIT:
+                return m_exit;
+        }
+    }
+    // Drawing background tiles
+    for (int y=0; y < round(600/MenuBackground->h)*2; y++){
+        for (int x=0; x < round(800/MenuBackground->w)*3; x++){
+            DrawSurface(MenuBackground, BgAnimationCounter+MenuBackground->w*x,MenuBackground->h*y,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+        }
+    }
+    // Drawing frame, sliders, checkboxes, settings icons and etc
+    DrawSurface(SettingsFrame, 0, 0, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawSurface(SettingsIcons, 32, 50, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+
+    DrawCheckbox(0,40,Pref.fullscreen);
+
+    BgAnimationCounter-=5;
+    if (BgAnimationCounter <= -MenuBackground->w){
+        BgAnimationCounter = 0;
+    }
+
+    DrawCursor();
+    
+    SDL_Flip(Screen);
+    return m_settings;
 }

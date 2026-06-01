@@ -20,6 +20,8 @@ SDL_Surface *CloudsTileset;
 SDL_Surface *MenuFrame;
 // Server list frame
 SDL_Surface *ServerlistFrame;
+// Settings frame
+SDL_Surface *SettingsFrame;
 // Copyright
 SDL_Surface *MenuCopyright;
 // Menu background
@@ -28,6 +30,10 @@ SDL_Surface *MenuBackground;
 SDL_Surface *MenuArrow;
 // Server list bar
 SDL_Surface *ServerlistBar;
+// Settings icons
+SDL_Surface *SettingsIcons;
+// Checkbox
+SDL_Surface *Checkbox;
 // Cool 3D banner
 SDL_Surface *Banner;
 // Text tileset
@@ -52,6 +58,7 @@ void LoadSprites(){
 	CloudsTileset = LoadTexture("data/clouds.png");
 	MenuFrame = LoadTexture("data/menu_frame.png");
 	ServerlistFrame = LoadTexture("data/serverlist_frame.png");
+	SettingsFrame = LoadTexture("data/settings_frame.png");
 	MenuCopyright = LoadTexture("data/copyright.png");
 	MenuBackground = LoadTexture("data/background.png");
 	MenuArrow = LoadTexture("data/arrow.png");
@@ -61,6 +68,8 @@ void LoadSprites(){
 	Cursor = LoadTexture("data/cursor.png");
 	DecorationsTileset = LoadTexture("data/decorations.png");
 	Mountians = LoadTexture("data/mountians.png");
+	SettingsIcons = LoadTexture("data/settings_icons.png");
+	Checkbox = LoadTexture("data/checkbox.png");
 }
 
 /* Draw rectange with size and color */
@@ -303,4 +312,17 @@ void DrawStringWithUnderline(int x, int y, char *string, int color){
 /* Drawing cursor  */
 void DrawCursor(){
 	DrawSurface(Cursor, MouseX-50/2,MouseY-50/2,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+}
+
+/* Drawing checkbox */
+void DrawCheckbox(int x, int y, bool active){
+	int selection;
+	if (active == true){
+		selection = 2;
+	}
+	else{
+		selection = 1;
+	}
+
+	DrawAnimationSurface(Checkbox, x, y, SDL_MapRGBA(Screen->format, 0, 0, 0, 255), 2, selection);
 }

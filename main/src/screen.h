@@ -26,6 +26,8 @@ extern SDL_Surface *CloudsTileset;
 extern SDL_Surface *MenuFrame;
 // Server list frame
 extern SDL_Surface *ServerlistFrame;
+// Settings frame
+extern SDL_Surface *SettingsFrame;
 // Copyright
 extern SDL_Surface *MenuCopyright;
 // Menu background
@@ -34,6 +36,10 @@ extern SDL_Surface *MenuBackground;
 extern SDL_Surface *MenuArrow;
 // Server list bar
 extern SDL_Surface *ServerlistBar;
+// Settings icons
+extern SDL_Surface *SettingsIcons;
+// Checkbox
+extern SDL_Surface *Checkbox;
 // Cool 3D banner
 extern SDL_Surface *Banner;
 // Text tileset
@@ -87,4 +93,5 @@ void DrawCompressedString(int x, int y, char *string, int color); // Drawing com
 void DrawAnimatedString(int x, int y, char *string, int color); // Drawing text using text atlas with cool effect
 void DrawStringWithUnderline(int x, int y, char *string, int color); // Drawing text using text atlas with underline
 void DrawCursor(); // Drawing cursor
+void DrawCheckbox(int x, int y, bool active); // Drawing checkbox
 #endif
