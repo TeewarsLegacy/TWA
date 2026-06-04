@@ -1,15 +1,27 @@
-Teewars Legacy
+Teewars legacy
 ----------------------
-What is Teewars legacy
-	Teewars Legacy - inspired by teeworlds game made in 2000s indie opensource games style (Like pingus, hedgewars, etc) 
-	with 2000s technologies like SDL 1.2, SDL_mixer 1.2.
-Features of project
+What is Teewars legacy:
+Teewars Legacy - inspired by teeworlds game made in 2000s indie opensource games style (Like pingus, hedgewars, etc) with 2000s technologies like SDL 1.2, SDL_mixer 1.2.
+
+Features of project:
 - Oldschool sources structure like in 2000s games
 - Oldschool pixelated GFX like in 2000s games
 - Vector based map like in old Beta Teewars from 2003-2004
 - 2 Maps
-Recources
-	TWL Website - https://teewarslegacy.com.ua/
+
+Controls:
+A or arrow left - Move left
+D or arrow right - Move right
+Space or W - Jump
+Left click - Shoot
+Right click - Hook
+1 - Select gun
+2 - Select shotgun
+3 - Select grenade
+4 - Select rifle
+
+Recources:
+TWL Website - https://teewarslegacy.com.ua/
 ----------------------
 Copyright (c) 2007 Magnus Auvinen
 Copyright (c) 2026 Mykyta Polishyk
