@@ -17,6 +17,7 @@ public:
 	MenuState HelpLoop();
 	MenuState ServerlistLoop();
     MenuState SettingsLoop();
+    MenuState MapDebuggerLoop();
 private:
 	SDL_Event Event;
     int BgAnimationCounter;
@@ -26,6 +27,9 @@ private:
     int ServerlistOptionSelector = 0;
     NMSPacket MasterserverPacket;
     NetAddr Masterserver;
+    Map MapDebuggerMap;
+    char MDCode[9] = {0};
+    int XPos = 0, YPos = 0;
 };
 
 #endif

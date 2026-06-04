@@ -7,6 +7,7 @@
 #include "types.h"
 #include "stdio.h"
 #include "string.h"
+#include "map.h"
 #include "cmath"
 
 // Global objects
@@ -43,6 +44,17 @@ MenuState MenuCore::MainLoop(){
 	while (SDL_PollEvent(&Event)){
         switch (Event.type) { // Listening events
             case SDL_KEYDOWN:
+                // Adding symbols to buffer, and if this buffer = "mapdebug" we open secret page
+                for (int i = 0; i < 7; i++)
+                    MDCode[i] = MDCode[i + 1];
+                MDCode[7] = Event.key.keysym.unicode&0x7F;
+                MDCode[8] = '\0';
+                printf("Code: %s\n", MDCode);
+                if (strcmp(MDCode, "mapdebug") == 0){
+                    printf("Active");
+                    LoadMap(&MapDebuggerMap, "empty");
+                    return m_mapdebugger;
+                }
                 switch (Event.key.keysym.sym){
                     case SDLK_ESCAPE:
                         return m_exit;
@@ -363,4 +375,48 @@ MenuState MenuCore::SettingsLoop(){
     
     SDL_Flip(Screen);
     return m_settings;
+}
+
+MenuState MenuCore::MapDebuggerLoop(){
+    SDL_FillRect(Screen, NULL, SDL_MapRGB(Screen->format, 105,138,214)); // Cleaning screen
+
+    while (SDL_PollEvent(&Event)){
+        switch (Event.type) { // Listening events
+            case SDL_KEYDOWN:
+                switch (Event.key.keysym.sym){
+                    case SDLK_ESCAPE:
+                        return m_titlescreen;
+                    case SDLK_F5:
+                        LoadMap(&MapDebuggerMap, "empty");
+                        break;
+                    }
+                break;
+            case SDL_QUIT:
+                return m_exit;
+        }
+    }
+    // Smooth control
+    Uint8* CurrentKeyStates = SDL_GetKeyState(NULL);    
+
+    if (CurrentKeyStates[SDLK_LEFT] || CurrentKeyStates[SDLK_a]) {
+        XPos++;
+    }
+    if (CurrentKeyStates[SDLK_RIGHT] || CurrentKeyStates[SDLK_d]) {
+        XPos--;
+    }
+    if (CurrentKeyStates[SDLK_UP]) {
+        YPos++;
+    }
+    if (CurrentKeyStates[SDLK_DOWN]) {
+        YPos--;
+    }
+    DrawBackground(XPos/2, YPos-150);
+    DrawMap(XPos, YPos, &MapDebuggerMap);
+    DrawString(0,50,"MAP DEBUGGER",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawString(0,100,"USE F5 TO UPDATE MAP",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+
+    DrawCursor();
+    
+    SDL_Flip(Screen);
+    return m_mapdebugger;
 }

@@ -100,8 +100,10 @@ void ClientMain(){
 	char WindowCaption[86];
 	strcpy(WindowCaption, "Teewars legacy milestone ");
 	strcat(WindowCaption, TWLEGACY_MILESTONE);
+	// Window settings
 	SDL_WM_SetCaption(WindowCaption, NULL);
 	SDL_ShowCursor(SDL_DISABLE);
+  	SDL_EnableUNICODE(1);
 	// Playing music
 	PlayMusic();
 
@@ -129,6 +131,9 @@ void ClientMain(){
 			case m_serverlist:
 				Menu->NetworkLoop();
 				state = Menu->ServerlistLoop();
+				break;
+			case m_mapdebugger:
+				state = Menu->MapDebuggerLoop();
 				break;
 			case m_exit:
 				// Removing objects

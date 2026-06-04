@@ -12,6 +12,7 @@ enum MenuState{
 	m_settings,
 	m_online, // Nothing, because player ingame
 	m_pausemenu, // Pause menu
+	m_mapdebugger, // Map debbugger
 	m_exit // Exit from game
 };
 
