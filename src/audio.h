@@ -4,7 +4,12 @@
 #ifndef AUDIO_H
 #define AUDIO_H
 
-void PlayAudio(char *path);
+enum{
+	click = 1
+};
+
+void LoadSounds();
+void PlaySound(int id);
 void PlayMusic();
 void StopMusic();
 

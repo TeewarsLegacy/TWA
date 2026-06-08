@@ -24,6 +24,7 @@ GameCore *Game;
 MenuCore *Menu;
 
 Mix_Music *Music;
+Mix_Chunk *Click;
 
 int MouseX, MouseY;
 
@@ -79,16 +80,13 @@ void ClientMain(){
 		fprintf(stderr, "Failed to initializate audio system");
         exit(1);
 	}
-	Music = Mix_LoadMUS("data/menu.xm");
-	if (!Music) {
-	    printf("Load failed: %s\n", Mix_GetError());
-	}
 	// Network initialization
     NetInit();
     CSocket = NetUDPOpen(0);
     SetNONBlock(CSocket);
 	// Loading data
 	LoadSprites();
+	LoadSounds();
 	// Creating window
 	if (Pref.fullscreen == true){
 		Screen = SDL_SetVideoMode(800, 600, 32, SDL_SWSURFACE | SDL_FULLSCREEN);

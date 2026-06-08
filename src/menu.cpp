@@ -44,6 +44,7 @@ MenuState MenuCore::MainLoop(){
 	while (SDL_PollEvent(&Event)){
         switch (Event.type) { // Listening events
             case SDL_KEYDOWN:
+            	PlaySound(click);
                 // Adding symbols to buffer, and if this buffer = "mapdebug" we open secret page
                 for (int i = 0; i < 7; i++)
                     MDCode[i] = MDCode[i + 1];
@@ -164,6 +165,7 @@ MenuState MenuCore::ServerlistLoop(){
     while (SDL_PollEvent(&Event)){
         switch (Event.type) { // Listening events
             case SDL_KEYDOWN:
+            	PlaySound(click);
                 switch (Event.key.keysym.sym){
                     case SDLK_ESCAPE:
                         NetClose(CSocket);
@@ -268,6 +270,7 @@ MenuState MenuCore::AuthorsLoop(){
     while (SDL_PollEvent(&Event)){
         switch (Event.type) { // Listening events
             case SDL_KEYDOWN:
+            	PlaySound(click);
                 return m_titlescreen;
                 break;
             case SDL_QUIT:
@@ -295,6 +298,7 @@ MenuState MenuCore::HelpLoop(){
     while (SDL_PollEvent(&Event)){
         switch (Event.type) { // Listening events
             case SDL_KEYDOWN:
+            	PlaySound(click);
                 return m_titlescreen;
             case SDL_QUIT:
                 return m_exit;
@@ -347,6 +351,7 @@ MenuState MenuCore::SettingsLoop(){
     while (SDL_PollEvent(&Event)){
         switch (Event.type) { // Listening events
             case SDL_KEYDOWN:
+            	PlaySound(click);
                 return m_titlescreen;
                 break;
             case SDL_QUIT:
