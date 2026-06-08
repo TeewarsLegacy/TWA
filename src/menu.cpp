@@ -51,7 +51,7 @@ MenuState MenuCore::MainLoop(){
                 MDCode[8] = '\0';
                 printf("Code: %s\n", MDCode);
                 if (strcmp(MDCode, "mapdebug") == 0){
-                	ShowMap = false;
+                    LoadMap(&MapDebuggerMap, "empty");
                     return m_mapdebugger;
                 }
                 switch (Event.key.keysym.sym){
