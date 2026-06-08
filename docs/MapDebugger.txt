@@ -1,0 +1,16 @@
+MAP DEBUGGER
+------------
+Map debugger is a tool in Teewars Legacy that allows you to preview a map.
+------------
+HOW TO OPEN
+------------
+To open map debugger you have to enter cheat code on title screen "MAPDEBUG". This will open the map debugger interface.
+------------
+CONTROLS
+------------
+Left arrow - move view left
+Right arrow - move view right
+Up arrow - move view up
+Down arrow - move view down
+F5 - Reload map
+F6 - Toggle center pointer
