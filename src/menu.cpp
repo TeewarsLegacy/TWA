@@ -51,8 +51,7 @@ MenuState MenuCore::MainLoop(){
                 MDCode[8] = '\0';
                 printf("Code: %s\n", MDCode);
                 if (strcmp(MDCode, "mapdebug") == 0){
-                    printf("Active");
-                    LoadMap(&MapDebuggerMap, "empty");
+                	ShowMap = false;
                     return m_mapdebugger;
                 }
                 switch (Event.key.keysym.sym){
@@ -387,8 +386,18 @@ MenuState MenuCore::MapDebuggerLoop(){
                     case SDLK_ESCAPE:
                         return m_titlescreen;
                     case SDLK_F5:
+                    	ShowMap = false;
                         LoadMap(&MapDebuggerMap, "empty");
+                        ShowMap = true;
                         break;
+                    case SDLK_F6:
+                    	if (ShowCenterPointer == true){
+                    		ShowCenterPointer = false;
+                    	}
+                    	else{
+                    		ShowCenterPointer = true;
+                    	}
+                    	break;
                     }
                 break;
             case SDL_QUIT:
@@ -411,12 +420,24 @@ MenuState MenuCore::MapDebuggerLoop(){
         YPos--;
     }
     DrawBackground(XPos/2, YPos-150);
-    DrawMap(XPos, YPos, &MapDebuggerMap);
+    if (ShowMap == true){
+    	DrawMap(XPos + 400, YPos + 300, &MapDebuggerMap);
+    }
+    // Debug hud
     DrawString(0,50,"MAP DEBUGGER",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
     DrawString(0,100,"USE F5 TO UPDATE MAP",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawString(0,150,"USE F6 TO HIDE CENTER POINTER",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    char buffer[32];
+    snprintf(buffer, sizeof(buffer), "X %d", -XPos);
+    DrawString(0,200,buffer,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    snprintf(buffer, sizeof(buffer), "Y %d", -YPos);
+    DrawString(0,250,buffer,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 
-    DrawCursor();
-    
+    if (ShowCenterPointer == true){
+	    // Center pointer
+	    DrawSurface(Cursor, 400-50/2, 300-50/2, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    }
+
     SDL_Flip(Screen);
     return m_mapdebugger;
 }

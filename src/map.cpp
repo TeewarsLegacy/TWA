@@ -7,6 +7,8 @@
 
 /* Parser of maps */
 void LoadMap(Map *object, const char* map_name){
+    // Cleaning map object
+    memset(object, 0, sizeof(Map));
 	FILE *file_pointer;
 	// Editing path and loading
 	char path[256] = "maps/";

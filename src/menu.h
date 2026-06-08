@@ -30,6 +30,8 @@ private:
     Map MapDebuggerMap;
     char MDCode[9] = {0};
     int XPos = 0, YPos = 0;
+    bool ShowMap = false;
+    bool ShowCenterPointer = true;
 };
 
 #endif
