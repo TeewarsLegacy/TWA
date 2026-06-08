@@ -1,6 +1,6 @@
 MAP DEBUGGER
 ------------
-Map debugger is a tool in Teewars Legacy that allows you to preview a map.
+Map debugger is a tool in Teewars Legacy that allows you to preview a map, and build maps a lot easier.
 ------------
 HOW TO OPEN
 ------------
