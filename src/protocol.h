@@ -12,7 +12,7 @@ struct NInput{
 	// For all of these value from 0 to 1 (boolean)
 	int left=0;
 	int right=0;
-	int angle=0;
+	float angle=0;
 	int jump=0;
 	int fire=0;
 	int hook=0;
@@ -25,7 +25,7 @@ struct NPlayer{
 	char name[32];
 	int x;
 	int y;
-	int angle;
+	float angle;
 	int active_weapon;
 	int current_state;
 	NetAddr addr;

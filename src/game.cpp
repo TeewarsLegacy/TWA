@@ -1,4 +1,5 @@
 /* copyright (c) 2026 mykyta polishyk, see LICENSE file for more info */
+#define _USE_MATH_DEFINES
 #include "game.h"
 #include "screen.h"
 #include "protocol.h"
@@ -12,6 +13,7 @@
 extern SDL_Surface *Screen;
 extern bool Connected;
 extern int CSocket;
+extern int MouseX, MouseY;
 
 int xpos = 0;
 int ypos = 0;
@@ -100,15 +102,20 @@ MenuState GameCore::Loop(){
 	if (CurrentKeyStates[SDLK_DOWN]) {
 	    ypos--;
 	}
+
+	// Calculating angle 
+	CInput.angle = atan2f(MouseY - 300, MouseX - 400) * 180 / M_PI;
+
+	// Drawing map, and background
     DrawBackground(xpos/2, ypos-150);
     DrawMap(xpos, ypos, &CPacket.current_map);
     // Debug hud
-   /*char buf[64];
+   	char buf[64];
 	sprintf(buf, "LEFT %d", CInput.left);
 	DrawString(0, 50, buf, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 	sprintf(buf, "RIGHT %d", CInput.right);
     DrawString(0,100,buf,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-	sprintf(buf, "ANGLE %d", CInput.angle);
+	sprintf(buf, "ANGLE %f", CInput.angle);
     DrawString(0,150,buf,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 	sprintf(buf, "JUMP %d", CInput.jump);
     DrawString(0,200,buf,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
@@ -117,7 +124,7 @@ MenuState GameCore::Loop(){
 	sprintf(buf, "HOOK %d", CInput.hook);
     DrawString(0,300,buf,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 	sprintf(buf, "ACTIVE_WEAPON %d", CInput.active_weapon);
-    DrawString(0,350,buf,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));*/
+    DrawString(0,350,buf,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 
     DrawCursor();
     
