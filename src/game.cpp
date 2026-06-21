@@ -104,7 +104,7 @@ MenuState GameCore::Loop(){
 	}
 
 	// Calculating angle 
-	CInput.angle = atan2f(MouseY - 300, MouseX - 400) * 180 / M_PI;
+	CInput.angle = (atan2f(400 - MouseX, MouseY - 300) * 180 / M_PI) + 180;
 
 	// Drawing map, and background
     DrawBackground(xpos/2, ypos-150);
@@ -125,6 +125,8 @@ MenuState GameCore::Loop(){
     DrawString(0,300,buf,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 	sprintf(buf, "ACTIVE_WEAPON %d", CInput.active_weapon);
     DrawString(0,350,buf,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    // Debug tee
+    DrawTee(400-16, 300-16, walk_left, -CInput.angle, gun, SDL_MapRGBA(Screen->format, 255, 0, 255, 255));
 
     DrawCursor();
     

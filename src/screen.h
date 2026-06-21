@@ -3,6 +3,7 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
 #include "SDL/SDL_gfxPrimitives.h"
+#include "SDL/SDL_rotozoom.h"
 
 #include "protocol.h"
 #include "types.h"
@@ -82,9 +83,9 @@ void LoadSprites(); // Load sprites into pointers
 void DrawRectangle(int x, int y, int w, int h, int color); // Draw rectange with size and color
 SDL_Surface* LoadTexture(char *path); // Load texture into surface
 void DrawSurface(SDL_Surface *surface, int x, int y, int color); // Draw surface with size and color
-void DrawAnimationSurface(SDL_Surface *surface, int x, int y, int color, int numofframes, int frame); // Drawing surface, but with frame animation (Can be helpfull in animations)
+void DrawAnimationSurface(SDL_Surface *surface, int x, int y, int color, int numofframes, int frame, int angle=0); // Drawing surface, but with frame animation (Can be helpfull in animations)
 // Game GFX functions
-void DrawTee(int x, int y, PlayerState state, int color); // Drawing player with animation
+void DrawTee(int x, int y, int state, float angle, int weapon_type, int color); // Drawing player with animation
 void DrawMap(int x, int y, Map *object); // Draw map with game objects (like pickups and etc)
 void DrawBackground(int offsetx, int offsety); // Drawing clouds and mountians with paralax
 int StringLength(); // Return length of string in pixels

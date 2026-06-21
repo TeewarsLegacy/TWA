@@ -312,9 +312,9 @@ MenuState MenuCore::HelpLoop(){
     }
     // Drawing info with different icons
     DrawString(0,50,"USE A AND D KEYS TO MOVE",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-    DrawTee(24*24 + TeeTilesetLeft->w/2,50, walk_left, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawTee(24*24 + TeeTilesetLeft->w/2,50, walk_left, 0, gun, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
     DrawString(0,100,"USE SPACE FOR JUMPING",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-    DrawTee(21*24 + TeeTilesetLeft->w/2,100, fall_left, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    DrawTee(21*24 + TeeTilesetLeft->w/2,100, fall_left, 0, gun, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
     DrawString(0,150,"USE LEFT MOUSE BUTTON TO SHOOT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
     DrawAnimationSurface(WeaponsTilesetRight, 30*24 + WeaponsTilesetRight->w/3,150, SDL_MapRGBA(Screen->format, 255, 255, 255, 255), 4, shotgun);
     DrawString(0,200,"USE RIGHT MOUSE BUTTON TO HOOK",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));

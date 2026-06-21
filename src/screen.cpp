@@ -1,3 +1,5 @@
+/* copyright (c) 2026 mykyta polishyk, see LICENSE file for more info */
+
 #include "screen.h"
 #include "math.h"
 
@@ -91,7 +93,8 @@ SDL_Surface* LoadTexture(char *path){
 
 /* Draw surface with size and color */
 void DrawSurface(SDL_Surface *surface, int x, int y, int color){
-	SDL_Rect dest; // Pos of surface
+
+	SDL_Rect dest; // Position of surface
 	dest.x = x;
 	dest.y = y;
 
@@ -100,24 +103,62 @@ void DrawSurface(SDL_Surface *surface, int x, int y, int color){
 }
 
 /* Drawing surface, but with frame animation */
-void DrawAnimationSurface(SDL_Surface *surface, int x, int y, int color, int numofframes, int frame){
-	// Crop frame 
-	SDL_Rect src;
-	src.x = 0;
-	src.y = (frame-1)*(surface->h/numofframes);
-	src.w = surface->w;
-	src.h = surface->h / numofframes;
+void DrawAnimationSurface(SDL_Surface *surface, int x, int y, int color, int numofframes, int frame, int angle) {
+    // Calculating sprite height
+    int frame_h = surface->h / numofframes;
+    
+    SDL_Surface* single_frame = SDL_CreateRGBSurface(
+        SDL_SWSURFACE, surface->w, frame_h, surface->format->BitsPerPixel,
+        surface->format->Rmask, surface->format->Gmask, surface->format->Bmask, surface->format->Amask
+    );
 
-	SDL_Rect point2;
-	point2.x = x;
-	point2.y = y-src.h;
+    Uint32 old_flags = surface->flags & SDL_SRCALPHA;
+    if (old_flags) {
+        SDL_SetAlpha(surface, 0, 0);
+    }
 
-	// Drawing surface
-	SDL_BlitSurface(surface, &src, Screen, &point2);
+    if (surface->flags & SDL_SRCCOLORKEY) {
+        SDL_SetColorKey(single_frame, SDL_SRCCOLORKEY, surface->format->colorkey);
+    }
+    
+    SDL_Rect src;
+    src.x = 0;
+    src.y = (frame - 1) * frame_h;
+    src.w = surface->w;
+    src.h = frame_h;
+    
+    // Copy the single frame from the sheet onto our temp surface
+    SDL_BlitSurface(surface, &src, single_frame, NULL);
+
+    // Restore original alpha flags back to asset tileset
+    if (old_flags) {
+        SDL_SetAlpha(surface, SDL_SRCALPHA, surface->format->alpha);
+    }
+
+    // Rotating isolated surface
+    SDL_Surface* rotated_frame = rotozoomSurface(single_frame, angle, 1.0, 1);
+
+	if (surface->flags & SDL_SRCCOLORKEY) {
+        SDL_SetColorKey(rotated_frame, SDL_SRCCOLORKEY, surface->format->colorkey);
+    } else if (old_flags && rotated_frame) {
+        SDL_SetAlpha(rotated_frame, SDL_SRCALPHA, surface->format->alpha);
+    }
+
+    SDL_Rect dest;
+    dest.x = x - (rotated_frame->w - single_frame->w) / 2;
+    dest.y = y - src.h - (rotated_frame->h - single_frame->h) / 2;
+
+    // Drawing surface
+    SDL_BlitSurface(rotated_frame, NULL, Screen, &dest);
+
+    // Removing those buffers
+    SDL_FreeSurface(single_frame);
+    SDL_FreeSurface(rotated_frame);
 }
 
+
 /* Drawing player with color, and animation */
-void DrawTee(int x, int y, PlayerState state, int color){
+void DrawTee(int x, int y, int state, float angle, int weapon_type, int color){
 	switch (state){
 		case walk_left:
 			DrawAnimationSurface(TeeTilesetLeft, x, y, color, 4, tee_walk1);
@@ -138,6 +179,14 @@ void DrawTee(int x, int y, PlayerState state, int color){
 			DrawAnimationSurface(TeeTilesetRight, x, y, color, 4, tee_jump);
 			break;
 	}
+	if (angle >= 180){
+		DrawAnimationSurface(WeaponsTilesetRight, x, y, SDL_MapRGBA(Screen->format, 255, 255, 255, 255), 4, gun, angle+90);
+	}
+	else{
+		DrawAnimationSurface(WeaponsTilesetLeft, x, y, SDL_MapRGBA(Screen->format, 255, 255, 255, 255), 4, gun, angle+90);
+	}
+
+	
 }
 /* Draw map with game objects (like pickups and etc) */
 void DrawMap(int x, int y, Map *object){
