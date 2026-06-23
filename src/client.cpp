@@ -23,7 +23,8 @@ Uint32 PrevTime;
 GameCore *Game;
 MenuCore *Menu;
 
-Mix_Music *Music;
+Mix_Music *MenuMusic;
+Mix_Music *Ingame1Music;
 Mix_Chunk *Click;
 
 int MouseX, MouseY;
@@ -103,7 +104,7 @@ void ClientMain(){
 	SDL_ShowCursor(SDL_DISABLE);
   	SDL_EnableUNICODE(1);
 	// Playing music
-	PlayMusic();
+	PlayMusic(ingame1_music);
 
 	// Mainloop
 	while (true){

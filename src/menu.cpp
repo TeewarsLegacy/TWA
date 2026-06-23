@@ -21,7 +21,6 @@ extern GamePreferences Pref;
 MenuCore::MenuCore(){
     BgAnimationCounter = 0;
     AuthorsAnimationCounter = 0;
-    PlayMusic();
 	return;
 }
 

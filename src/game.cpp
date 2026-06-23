@@ -125,8 +125,17 @@ MenuState GameCore::Loop(){
     DrawString(0,300,buf,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 	sprintf(buf, "ACTIVE_WEAPON %d", CInput.active_weapon);
     DrawString(0,350,buf,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+
+    
+
     // Debug tee
-    DrawTee(400-16, 300-16, walk_left, -CInput.angle, gun, SDL_MapRGBA(Screen->format, 255, 0, 255, 255));
+    if (CInput.angle >= 180){
+    	
+    }
+    else{
+
+    }
+    DrawTee(400-16, 300-16, walk_left, -CInput.angle, gun, SDL_MapRGB(Screen->format, 255, 0, 255));
 
     DrawCursor();
     

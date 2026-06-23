@@ -8,9 +8,14 @@ enum{
 	click = 1
 };
 
+enum{
+	menu_music = 1,
+	ingame1_music = 2
+};
+
 void LoadSounds();
 void PlaySound(int id);
-void PlayMusic();
+void PlayMusic(int id);
 void StopMusic();
 
 #endif
