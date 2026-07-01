@@ -9,17 +9,17 @@
 // Menu class define
 class MenuCore{
 public:
-	MenuCore();
+    MenuCore();
     void Refresh();
     void NetworkLoop();
-	MenuState MainLoop();
-	MenuState AuthorsLoop();
-	MenuState HelpLoop();
-	MenuState ServerlistLoop();
+    MenuState MainLoop();
+    MenuState AuthorsLoop();
+    MenuState HelpLoop();
+    MenuState ServerlistLoop();
     MenuState SettingsLoop();
     MenuState MapDebuggerLoop();
 private:
-	SDL_Event Event;
+    SDL_Event Event;
     int BgAnimationCounter;
     int AuthorsAnimationCounter;
     int TitlescreenSelector = 0;

@@ -12,9 +12,13 @@
 #define SCREEN_H
 
 // Sprites global pointers
-// Tees tileset
+// Tees tileset (TODO: REMOVE THIS AND ADD 1 LEGS TILESET)
 extern SDL_Surface *TeeTilesetLeft;
 extern SDL_Surface *TeeTilesetRight;
+// Tees tilesets
+extern SDL_Surface *TeeBodiesTileset;
+extern SDL_Surface *TeeLegsTileset; // Now on some time empty
+extern SDL_Surface *TeeEye;
 // Weapons tileset
 extern SDL_Surface *WeaponsTilesetLeft;
 extern SDL_Surface *WeaponsTilesetRight;
@@ -52,14 +56,14 @@ extern SDL_Surface *DecorationsTileset;
 // Mountians
 extern SDL_Surface *Mountians;
 
-enum{ // Tee tileset
+enum{ // Tee tileset (TODO: )
 	tee_idle=1,
 	tee_walk1,
 	tee_walk2,
 	tee_jump
 };
 
-enum{ // Weapons tileset
+enum{ // Weapons tileset (TODO: REMOVE THIS AND START USE WEAPONS NAMES FROM PROTOCOL)
 	gun=1,
 	rifle,
 	shotgun,
@@ -85,7 +89,7 @@ SDL_Surface* LoadTexture(char *path); // Load texture into surface
 void DrawSurface(SDL_Surface *surface, int x, int y, int color); // Draw surface with size and color
 void DrawAnimationSurface(SDL_Surface *surface, int x, int y, int color, int numofframes, int frame, int angle=0); // Drawing surface, but with frame animation (Can be helpfull in animations)
 // Game GFX functions
-void DrawTee(int x, int y, int state, float angle, int weapon_type, int color); // Drawing player with animation
+void DrawTee(int x, int y, int state, NPlayerAppearance appearance, float angle, int weapon_type, int color); // Drawing player with animation
 void DrawMap(int x, int y, Map *object); // Draw map with game objects (like pickups and etc)
 void DrawBackground(int offsetx, int offsety); // Drawing clouds and mountians with paralax
 int StringLength(); // Return length of string in pixels

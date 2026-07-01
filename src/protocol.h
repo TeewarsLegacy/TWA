@@ -19,6 +19,13 @@ struct NInput{
 	int active_weapon=0; // only 0-3 value
 };
 
+/* Network player appearance struct */
+struct NPlayerAppearance{
+	int skin_id;
+	int body_color; // Now not using
+	int legs_color; // also
+};
+
 /* Network player entity */
 struct NPlayer{
 	int id;
@@ -28,9 +35,9 @@ struct NPlayer{
 	float angle;
 	int active_weapon;
 	int current_state;
+	NPlayerAppearance appearance;
 	NetAddr addr;
 };
-
 /* Vertex of vertex map system, also this is like float, but 1 is 32/32 */
 struct MapVertex{
 	int x,y;
@@ -87,6 +94,26 @@ enum{ //  Weapons
 	SHOTGUN,
 	RIFLE,
 	GRENADE
+};
+
+enum{ // Skins
+	SKIN_DEFAULT=0,
+	SKIN_BLUEKITTY,
+	SKIN_BLUESTRIPES,
+	SKIN_BROWNBEAR,
+	SKIN_PINKY,
+	SKIN_REDBOPP,
+	SKIN_CAMMOSTRIPES,
+	SKIN_COALA,
+	SKIN_LIMEKITTY,
+	SKIN_CAMMO,
+	SKIN_REDSTRIPE,
+	SKIN_SADDO,
+	SKIN_TOPTRI,
+	SKIN_TWINBOP,
+	SKIN_TWINTRI,
+	SKIN_WARPAINT,
+	SKIN_NINJA
 };
 
 enum{ // Game objects

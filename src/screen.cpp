@@ -10,6 +10,11 @@ extern int MouseX, MouseY;
 // Tees tileset
 SDL_Surface *TeeTilesetLeft;
 SDL_Surface *TeeTilesetRight;
+
+// Tees tilesets
+SDL_Surface *TeeBodiesTileset;
+SDL_Surface *TeeLegsTileset; // Now on some time empty
+SDL_Surface *TeeEye;
 // Weapons tileset
 SDL_Surface *WeaponsTilesetLeft;
 SDL_Surface *WeaponsTilesetRight;
@@ -51,8 +56,9 @@ char TextFromTileset[37] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
 /* Load sprites into pointers */
 void LoadSprites(){
-	TeeTilesetLeft = LoadTexture("data/tees_left.png");
-	TeeTilesetRight = LoadTexture("data/tees_right.png");
+	TeeBodiesTileset = LoadTexture("data/bodies.png");
+	TeeLegsTileset = LoadTexture("data/eye.png");
+	TeeEye = LoadTexture("data/eye.png");
 	WeaponsTilesetLeft = LoadTexture("data/weapons_left.png");
 	WeaponsTilesetRight = LoadTexture("data/weapons_right.png");
 	HealthTileset = LoadTexture("data/health.png");
@@ -158,8 +164,8 @@ void DrawAnimationSurface(SDL_Surface *surface, int x, int y, int color, int num
 
 
 /* Drawing player with color, and animation */
-void DrawTee(int x, int y, int state, float angle, int weapon_type, int color){
-	switch (state){
+void DrawTee(int x, int y, int state, NPlayerAppearance appearance, float angle, int weapon_type, int color){
+	/*switch (state){
 		case walk_left:
 			DrawAnimationSurface(TeeTilesetLeft, x, y, color, 4, tee_walk1);
 			break;
@@ -178,15 +184,15 @@ void DrawTee(int x, int y, int state, float angle, int weapon_type, int color){
 		case fall_right:
 			DrawAnimationSurface(TeeTilesetRight, x, y, color, 4, tee_jump);
 			break;
-	}
-	if (angle >= 180){
+	}*/
+	DrawAnimationSurface(TeeBodiesTileset, x, y, color, 17, appearance.skin_id + 1);
+	DrawSurface(TeeEye, x + 64, y - 64, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+	/*if (angle >= 180){
 		DrawAnimationSurface(WeaponsTilesetRight, x, y, SDL_MapRGBA(Screen->format, 255, 255, 255, 255), 4, gun, angle+90);
 	}
 	else{
 		DrawAnimationSurface(WeaponsTilesetLeft, x, y, SDL_MapRGBA(Screen->format, 255, 255, 255, 255), 4, gun, angle+90);
-	}
-
-	
+	}*/
 }
 /* Draw map with game objects (like pickups and etc) */
 void DrawMap(int x, int y, Map *object){

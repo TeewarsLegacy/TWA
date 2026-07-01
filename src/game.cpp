@@ -126,8 +126,6 @@ MenuState GameCore::Loop(){
 	sprintf(buf, "ACTIVE_WEAPON %d", CInput.active_weapon);
     DrawString(0,350,buf,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 
-    
-
     // Debug tee
     if (CInput.angle >= 180){
     	
@@ -135,7 +133,11 @@ MenuState GameCore::Loop(){
     else{
 
     }
-    DrawTee(400-16, 300-16, walk_left, -CInput.angle, gun, SDL_MapRGB(Screen->format, 255, 0, 255));
+
+	NPlayerAppearance test_appearance;
+	test_appearance.skin_id = SKIN_REDBOPP;    
+
+    DrawTee(400-16, 300-16, walk_left, test_appearance, -CInput.angle, gun, SDL_MapRGB(Screen->format, 255, 0, 255));
 
     DrawCursor();
     
