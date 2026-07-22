@@ -1,13 +1,24 @@
 BUILDING
 ------------
-Small warning, now Teewars Legacy can be compiled only on linux because many of network code is oriented for linux systems.
-
-To build Teewars Legacy you have to install g++, make, and all required dependencies listed below. 
+Linux
+------------
+To build Teewars Legacy on linux you have to install g++, make, and all required dependencies listed below. 
 Then run in terminal.
 
 * ./configure
 * make
 * make install
+
+Have fun :)
+------------
+Windows
+------------
+To build Teewars Legacy on windows you have to install MSYS, g++, make and all required dependencies listed below. 
+Then open UCRT64 terminal, go to Teewars Legacy directory, and write
+
+* ./configure
+* make
+* ldd twlegacy.exe | grep ucrt64 | awk '{print $3}' | xargs -I {} cp {} .
 
 Have fun :)
 ------------
