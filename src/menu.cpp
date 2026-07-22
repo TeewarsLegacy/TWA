@@ -43,7 +43,7 @@ MenuState MenuCore::MainLoop(){
 	while (SDL_PollEvent(&Event)){
         switch (Event.type) { // Listening events
             case SDL_KEYDOWN:
-            	PlaySound(click);
+            	PlayAudio(click);
                 // Adding symbols to buffer, and if this buffer = "mapdebug" we open secret page
                 for (int i = 0; i < 7; i++)
                     MDCode[i] = MDCode[i + 1];
@@ -93,7 +93,7 @@ MenuState MenuCore::MainLoop(){
                 return m_exit;
         }
     }
-    
+
     // Drawing background tiles
     for (int y=0; y < round(600/MenuBackground->h)*2; y++){
         for (int x=0; x < round(800/MenuBackground->w)*3; x++){
@@ -152,7 +152,7 @@ MenuState MenuCore::MainLoop(){
     }
 
     DrawCursor();
-    
+
 	SDL_Flip(Screen);
 	return m_titlescreen;
 }
@@ -164,7 +164,7 @@ MenuState MenuCore::ServerlistLoop(){
     while (SDL_PollEvent(&Event)){
         switch (Event.type) { // Listening events
             case SDL_KEYDOWN:
-            	PlaySound(click);
+            	PlayAudio(click);
                 switch (Event.key.keysym.sym){
                     case SDLK_ESCAPE:
                         NetClose(CSocket);
@@ -208,7 +208,7 @@ MenuState MenuCore::ServerlistLoop(){
                 return m_exit;
         }
     }
-    
+
     // Drawing background tiles
     for (int y=0; y < round(600/MenuBackground->h)*2; y++){
         for (int x=0; x < round(800/MenuBackground->w)*3; x++){
@@ -219,7 +219,7 @@ MenuState MenuCore::ServerlistLoop(){
     if (MasterserverPacket.servers_count > 0){
         DrawSurface(ServerlistFrame, 0,32,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
         for (int i = 0; i < 5; i++){
-            DrawSurface(MenuArrow, 650,108,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));   
+            DrawSurface(MenuArrow, 650,108,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             DrawSurface(ServerlistBar, 77,108+i*50,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             DrawCompressedString(180,108+44+i*50,MasterserverPacket.servers[i+ServerSelector].name,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             DrawCompressedString(77,108+44+i*50,"999",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
@@ -231,7 +231,7 @@ MenuState MenuCore::ServerlistLoop(){
         DrawString(70, 208,"SERVERS NOT FOUND",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
         DrawString(65, 272,"TRY PRESS REFRESH BUTTON",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
     }
-     
+
     // Options (also can be optimised)
     switch (ServerlistOptionSelector){
         case 0:
@@ -251,7 +251,7 @@ MenuState MenuCore::ServerlistLoop(){
             break;
 
     }
-    
+
     BgAnimationCounter-=5;
     if (BgAnimationCounter <= -MenuBackground->w){
         BgAnimationCounter = 0;
@@ -269,7 +269,7 @@ MenuState MenuCore::AuthorsLoop(){
     while (SDL_PollEvent(&Event)){
         switch (Event.type) { // Listening events
             case SDL_KEYDOWN:
-            	PlaySound(click);
+            	PlayAudio(click);
                 return m_titlescreen;
                 break;
             case SDL_QUIT:
@@ -286,7 +286,7 @@ MenuState MenuCore::AuthorsLoop(){
     DrawString(120,568,"PRESS ANY KEY TO EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 
     DrawCursor();
-    
+
     SDL_Flip(Screen);
     return m_authors;
 }
@@ -297,7 +297,7 @@ MenuState MenuCore::HelpLoop(){
     while (SDL_PollEvent(&Event)){
         switch (Event.type) { // Listening events
             case SDL_KEYDOWN:
-            	PlaySound(click);
+            	PlayAudio(click);
                 return m_titlescreen;
             case SDL_QUIT:
                 return m_exit;
@@ -336,7 +336,7 @@ MenuState MenuCore::HelpLoop(){
     }
 
     DrawCursor();
-    
+
     // Drawing message
     DrawString(120,568,"PRESS ANY KEY TO EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 
@@ -350,7 +350,7 @@ MenuState MenuCore::SettingsLoop(){
     while (SDL_PollEvent(&Event)){
         switch (Event.type) { // Listening events
             case SDL_KEYDOWN:
-            	PlaySound(click);
+            	PlayAudio(click);
                 return m_titlescreen;
                 break;
             case SDL_QUIT:
@@ -375,7 +375,7 @@ MenuState MenuCore::SettingsLoop(){
     }
 
     DrawCursor();
-    
+
     SDL_Flip(Screen);
     return m_settings;
 }
@@ -409,7 +409,7 @@ MenuState MenuCore::MapDebuggerLoop(){
         }
     }
     // Smooth control
-    Uint8* CurrentKeyStates = SDL_GetKeyState(NULL);    
+    Uint8* CurrentKeyStates = SDL_GetKeyState(NULL);
 
     if (CurrentKeyStates[SDLK_LEFT] || CurrentKeyStates[SDLK_a]) {
         XPos++;

@@ -648,6 +648,8 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
+SDL_LIBS
+SDL_CFLAGS
 host_os
 host_vendor
 host_cpu
@@ -2175,9 +2177,7 @@ struct stat;
 /* Most of the following tests are stolen from RCS 5.7 src/conf.sh.  */
 struct buf { int x; };
 struct buf * (*rcsopen) (struct buf *, struct stat *, int);
-static char *e (p, i)
-     char **p;
-     int i;
+static char *e (char **p, int i)
 {
   return p[i];
 }
@@ -2228,6 +2228,7 @@ extern int puts (const char *);
 extern int printf (const char *, ...);
 extern int dprintf (int, const char *, ...);
 extern void *malloc (size_t);
+extern void free (void *);
 
 // Check varargs macros.  These examples are taken from C99 6.10.3.5.
 // dprintf is used instead of fprintf to avoid needing to declare
@@ -3797,11 +3798,11 @@ if test x$ac_prog_cxx_stdcxx = xno
 then :
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for $CXX option to enable C++11 features" >&5
 printf %s "checking for $CXX option to enable C++11 features... " >&6; }
-if test ${ac_cv_prog_cxx_cxx11+y}
+if test ${ac_cv_prog_cxx_11+y}
 then :
   printf %s "(cached) " >&6
 else $as_nop
-  ac_cv_prog_cxx_cxx11=no
+  ac_cv_prog_cxx_11=no
 ac_save_CXX=$CXX
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
@@ -3843,11 +3844,11 @@ if test x$ac_prog_cxx_stdcxx = xno
 then :
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for $CXX option to enable C++98 features" >&5
 printf %s "checking for $CXX option to enable C++98 features... " >&6; }
-if test ${ac_cv_prog_cxx_cxx98+y}
+if test ${ac_cv_prog_cxx_98+y}
 then :
   printf %s "(cached) " >&6
 else $as_nop
-  ac_cv_prog_cxx_cxx98=no
+  ac_cv_prog_cxx_98=no
 ac_save_CXX=$CXX
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
@@ -5016,7 +5017,11 @@ fi
 
 
 
-# check for Windows resource compiler (MinGW only useful case)
+# Отримуємо чисті прапорці SDL
+SDL_CFLAGS=`sdl-config --cflags`
+SDL_LIBS=`sdl-config --libs`
+
+# Перевірка компілятора ресурсів Windows
 if test -n "$ac_tool_prefix"; then
   # Extract the first word of "${ac_tool_prefix}windres", so it can be a program name with args.
 set dummy ${ac_tool_prefix}windres; ac_word=$2
@@ -5125,7 +5130,7 @@ if test -z "$WINDRES"; then
 printf "%s\n" "$as_me: WARNING: windres not found - Windows resources will not be built" >&2;}
 fi
 
-# flags for different systems
+# Налаштування прапорців залежно від ОС
 
 
   # Make sure we can run config.sub.
@@ -5206,13 +5211,17 @@ case "$host_os" in
     mingw*|cygwin*)
         WIN32=true
 
-printf "%s\n" "#define PLATFORM_WINDOWS 1" >>confdefs.h
+printf "%s\n" "#define PLATFORM_WINDOWS /**/" >>confdefs.h
 
+        # Додаємо мережу Winsock
+        SDL_LIBS="$SDL_LIBS -lws2_32"
+        # Фікс шляхів для SDL_gfx
+        SDL_CFLAGS="$SDL_CFLAGS -I`sdl-config --prefix`/include/SDL"
         ;;
     *)
         WIN32=false
 
-printf "%s\n" "#define PLATFORM_LINUX 1" >>confdefs.h
+printf "%s\n" "#define PLATFORM_LINUX /**/" >>confdefs.h
 
         ;;
 esac
@@ -5263,7 +5272,8 @@ fi
 
 done
 
-# finding libraries
+# Перевіряємо ліби, але ТРЕТІМ аргументом передаємо "action-if-found",
+# щоб Autotools НЕ дублював їх у змінну LIBS автоматично!
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for SDL_Init in -lSDL" >&5
 printf %s "checking for SDL_Init in -lSDL... " >&6; }
 if test ${ac_cv_lib_SDL_SDL_Init+y}
@@ -5277,8 +5287,14 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 
 /* Override any GCC internal prototype to avoid an error.
    Use char because int might match the return type of a GCC
-   builtin and then its argument prototype would still apply.  */
-char SDL_Init ();
+   builtin and then its argument prototype would still apply.
+   The 'extern "C"' is for builds by C++ compilers;
+   although this is not generally supported in C code supporting it here
+   has little cost and some practical benefit (sr 110532).  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char SDL_Init (void);
 int
 main (void)
 {
@@ -5301,10 +5317,7 @@ fi
 printf "%s\n" "$ac_cv_lib_SDL_SDL_Init" >&6; }
 if test "x$ac_cv_lib_SDL_SDL_Init" = xyes
 then :
-  printf "%s\n" "#define HAVE_LIBSDL 1" >>confdefs.h
-
-  LIBS="-lSDL $LIBS"
-
+  :
 else $as_nop
   as_fn_error $? "SDL not found" "$LINENO" 5
 fi
@@ -5322,8 +5335,14 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 
 /* Override any GCC internal prototype to avoid an error.
    Use char because int might match the return type of a GCC
-   builtin and then its argument prototype would still apply.  */
-char IMG_Load ();
+   builtin and then its argument prototype would still apply.
+   The 'extern "C"' is for builds by C++ compilers;
+   although this is not generally supported in C code supporting it here
+   has little cost and some practical benefit (sr 110532).  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char IMG_Load (void);
 int
 main (void)
 {
@@ -5346,10 +5365,7 @@ fi
 printf "%s\n" "$ac_cv_lib_SDL_image_IMG_Load" >&6; }
 if test "x$ac_cv_lib_SDL_image_IMG_Load" = xyes
 then :
-  printf "%s\n" "#define HAVE_LIBSDL_IMAGE 1" >>confdefs.h
-
-  LIBS="-lSDL_image $LIBS"
-
+  :
 else $as_nop
   as_fn_error $? "SDL_image not found" "$LINENO" 5
 fi
@@ -5367,8 +5383,14 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 
 /* Override any GCC internal prototype to avoid an error.
    Use char because int might match the return type of a GCC
-   builtin and then its argument prototype would still apply.  */
-char Mix_OpenAudio ();
+   builtin and then its argument prototype would still apply.
+   The 'extern "C"' is for builds by C++ compilers;
+   although this is not generally supported in C code supporting it here
+   has little cost and some practical benefit (sr 110532).  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char Mix_OpenAudio (void);
 int
 main (void)
 {
@@ -5391,16 +5413,16 @@ fi
 printf "%s\n" "$ac_cv_lib_SDL_mixer_Mix_OpenAudio" >&6; }
 if test "x$ac_cv_lib_SDL_mixer_Mix_OpenAudio" = xyes
 then :
-  printf "%s\n" "#define HAVE_LIBSDL_MIXER 1" >>confdefs.h
-
-  LIBS="-lSDL_mixer $LIBS"
-
+  :
 else $as_nop
   as_fn_error $? "SDL_mixer not found" "$LINENO" 5
 fi
 
 
-# output
+
+
+
+# Вивід
 ac_config_files="$ac_config_files Makefile"
 
 cat >confcache <<\_ACEOF
@@ -6707,4 +6729,5 @@ if test -n "$ac_unrecognized_opts" && test "$enable_option_checking" != no; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: unrecognized options: $ac_unrecognized_opts" >&5
 printf "%s\n" "$as_me: WARNING: unrecognized options: $ac_unrecognized_opts" >&2;}
 fi
+
 

@@ -46,7 +46,7 @@ int NetUDPSend(int sock, NetAddr *addr, const void *data, int size) // Sending d
     a.sin_port = htons(addr->port);
     a.sin_addr.s_addr = addr->ip;
 
-    return sendto(sock, data, size, 0,
+    return sendto(sock, (const char*)data, size, 0,
                   (struct sockaddr*)&a, sizeof(a));
 }
 
@@ -59,7 +59,7 @@ int NetUDPRecv(int sock, NetAddr *addr, void *buffer, int maxsize)
     socklen_t len = sizeof(a);
     #endif
 
-    int r = recvfrom(sock, buffer, maxsize, 0,
+    int r = recvfrom(sock, (char*)buffer, maxsize, 0,
                      (struct sockaddr*)&a, &len);
 
     if (r <= 0)

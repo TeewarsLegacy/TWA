@@ -3,17 +3,18 @@
 #include <string.h>
 #include <stdlib.h>
 #include "network.h"
+#include <SDL.h>
 
 extern void ClientMain();
 extern void ServerMain(int Port, char *Map, char *Name);
 
 NetAddr MasterserverAddr;
 
-int main(int argc, char *argv[])
+extern "C" int main(int argc, char *argv[])
 {
     MasterserverAddr.ip = inet_addr("127.0.0.1");
     MasterserverAddr.port = 6000;
-    
+
 	bool IsSrv = false;
     int Port = 5000;
     char *Map="dm1";

@@ -109,7 +109,8 @@ am_twlegacy_OBJECTS = src/main.$(OBJEXT) src/client.$(OBJEXT) \
 	src/screen.$(OBJEXT) src/game.$(OBJEXT) src/menu.$(OBJEXT) \
 	src/map.$(OBJEXT) src/audio.$(OBJEXT)
 twlegacy_OBJECTS = $(am_twlegacy_OBJECTS)
-twlegacy_DEPENDENCIES =
+am__DEPENDENCIES_1 =
+twlegacy_DEPENDENCIES = $(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -234,6 +235,8 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+SDL_CFLAGS = @SDL_CFLAGS@
+SDL_LIBS = @SDL_LIBS@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
@@ -291,6 +294,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
+AM_CXXFLAGS = $(SDL_CFLAGS)
 twlegacy_SOURCES = \
     src/main.cpp \
     src/client.cpp \
@@ -303,7 +307,9 @@ twlegacy_SOURCES = \
     src/audio.cpp \
     logo.rc
 
-twlegacy_LDADD = -lSDL -lSDL_image -lSDL_mixer -lSDL_gfx
+
+# Спочатку плагіни, а в самому кінці розгортається $(SDL_LIBS) з мережею
+twlegacy_LDADD = -lSDL_image -lSDL_mixer -lSDL_gfx $(SDL_LIBS)
 all: all-am
 
 .SUFFIXES:

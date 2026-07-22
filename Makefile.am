@@ -1,5 +1,7 @@
 bin_PROGRAMS = twlegacy
 
+AM_CXXFLAGS = $(SDL_CFLAGS)
+
 twlegacy_SOURCES = \
     src/main.cpp \
     src/client.cpp \
@@ -12,4 +14,5 @@ twlegacy_SOURCES = \
     src/audio.cpp \
     logo.rc
 
-twlegacy_LDADD = -lSDL -lSDL_image -lSDL_mixer -lSDL_gfx
+# Спочатку плагіни, а в самому кінці розгортається $(SDL_LIBS) з мережею
+twlegacy_LDADD = -lSDL_image -lSDL_mixer -lSDL_gfx $(SDL_LIBS)

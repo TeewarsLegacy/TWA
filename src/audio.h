@@ -14,7 +14,7 @@ enum{
 };
 
 void LoadSounds();
-void PlaySound(int id);
+void PlayAudio(int id);
 void PlayMusic(int id);
 void StopMusic();
 

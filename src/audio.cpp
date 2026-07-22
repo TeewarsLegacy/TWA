@@ -12,7 +12,7 @@ void LoadSounds(){
 	Click = Mix_LoadWAV("sounds/click.wav");
 }
 
-void PlaySound(int id){
+void PlayAudio(int id){
 	switch (id){
 		case click:
 			Mix_PlayChannel(-1, Click, 0);
@@ -29,7 +29,7 @@ void PlayMusic(int id){
 			Mix_PlayMusic(Ingame1Music,-1);
 			break;
 	}
-    
+
 }
 
 void StopMusic(){
