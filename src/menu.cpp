@@ -108,35 +108,35 @@ MenuState MenuCore::MainLoop(){
     switch (TitlescreenSelector){
         case 0:
             DrawStringWithUnderline(120,250,"PLAY",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-            DrawString(120,285,"ABOUT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(120,285,"AUTHORS",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             DrawString(120,320,"HELP",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             DrawString(120,355,"SETTINGS",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             DrawString(120,390,"EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             break;
         case 1:
             DrawString(120,250,"PLAY",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-            DrawStringWithUnderline(120,285,"ABOUT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawStringWithUnderline(120,285,"AUTHORS",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             DrawString(120,320,"HELP",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             DrawString(120,355,"SETTINGS",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             DrawString(120,390,"EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             break;
         case 2:
             DrawString(120,250,"PLAY",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-            DrawString(120,285,"ABOUT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(120,285,"AUTHORS",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             DrawStringWithUnderline(120,320,"HELP",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             DrawString(120,355,"SETTINGS",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             DrawString(120,390,"EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             break;
         case 3:
             DrawString(120,250,"PLAY",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-            DrawString(120,285,"ABOUT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(120,285,"AUTHORS",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             DrawString(120,320,"HELP",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             DrawStringWithUnderline(120,355,"SETTINGS",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             DrawString(120,390,"EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             break;
         case 4:
             DrawString(120,250,"PLAY",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
-            DrawString(120,285,"ABOUT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+            DrawString(120,285,"AUTHORS",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             DrawString(120,320,"HELP",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             DrawString(120,355,"SETTINGS",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
             DrawStringWithUnderline(120,390,"EXIT",SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
