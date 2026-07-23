@@ -10,13 +10,13 @@
 /* Network input struct */
 struct NInput{
 	// For all of these value from 0 to 1 (boolean)
-	int left=0;
-	int right=0;
-	float angle=0;
-	int jump=0;
-	int fire=0;
-	int hook=0;
-	int active_weapon=0; // only 0-3 value
+	int left;
+	int right;
+	float angle;
+	int jump;
+	int fire;
+	int hook;
+	int active_weapon; // only 0-3 value
 };
 
 /* Network player appearance struct */
@@ -77,14 +77,14 @@ struct NPacket{
 struct ServerInfo{
 	// Also, here is fixed count of max players (8)
 	int players_count;
-	char name[19]="\0";
-	int have_password=0;
+	char name[19];
+	int have_password;
 	NetAddr addr;
 };
 
 /* Master server packet object */
 struct NMSPacket{
-	int servers_count=0;
+	int servers_count;
 	ServerInfo servers[1024];
 };
 

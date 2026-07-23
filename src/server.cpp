@@ -37,6 +37,7 @@ void ServerMain(int Port, char *Map, char *Name){
 	printf("Server with name '%s' listening on port %d\n", Name ,ServerPort);
 	// Sending info about server for masterserver
 	SInfo.players_count = 0;
+	SInfo.have_password = 0;
 	strcpy(SInfo.name, Name);
     NetUDPSend(SSocket, &MasterserverAddr, &SInfo, sizeof(SInfo));
 	// Loading map

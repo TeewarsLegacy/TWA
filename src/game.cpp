@@ -19,6 +19,14 @@ int xpos = 0;
 int ypos = 0;
 
 GameCore::GameCore(){
+	// Reseting NInput
+	CInput.left = 0;
+	CInput.right = 0;
+	CInput.angle = 0;
+	CInput.jump = 0;
+	CInput.fire = 0;
+	CInput.hook = 0;
+	CInput.active_weapon = 0; // only 0-3 value
 	return;
 }
 
