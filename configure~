@@ -5017,11 +5017,9 @@ fi
 
 
 
-# Отримуємо чисті прапорці SDL
 SDL_CFLAGS=`sdl-config --cflags`
 SDL_LIBS=`sdl-config --libs`
 
-# Перевірка компілятора ресурсів Windows
 if test -n "$ac_tool_prefix"; then
   # Extract the first word of "${ac_tool_prefix}windres", so it can be a program name with args.
 set dummy ${ac_tool_prefix}windres; ac_word=$2
@@ -5130,7 +5128,6 @@ if test -z "$WINDRES"; then
 printf "%s\n" "$as_me: WARNING: windres not found - Windows resources will not be built" >&2;}
 fi
 
-# Налаштування прапорців залежно від ОС
 
 
   # Make sure we can run config.sub.
@@ -5272,8 +5269,6 @@ fi
 
 done
 
-# Перевіряємо ліби, але ТРЕТІМ аргументом передаємо "action-if-found",
-# щоб Autotools НЕ дублював їх у змінну LIBS автоматично!
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for SDL_Init in -lSDL" >&5
 printf %s "checking for SDL_Init in -lSDL... " >&6; }
 if test ${ac_cv_lib_SDL_SDL_Init+y}
@@ -5422,7 +5417,6 @@ fi
 
 
 
-# Вивід
 ac_config_files="$ac_config_files Makefile"
 
 cat >confcache <<\_ACEOF

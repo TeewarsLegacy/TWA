@@ -88,7 +88,7 @@ MenuState GameCore::Loop(){
         }
     }
     // Smooth control
-    Uint8* CurrentKeyStates = SDL_GetKeyState(NULL);    
+    Uint8* CurrentKeyStates = SDL_GetKeyState(NULL);
 
 	if (CurrentKeyStates[SDLK_LEFT] || CurrentKeyStates[SDLK_a]) {
 	    xpos++;
@@ -111,7 +111,7 @@ MenuState GameCore::Loop(){
 	    ypos--;
 	}
 
-	// Calculating angle 
+	// Calculating angle
 	CInput.angle = (atan2f(400 - MouseX, MouseY - 300) * 180 / M_PI) + 180;
 
 	// Drawing map, and background
@@ -134,21 +134,23 @@ MenuState GameCore::Loop(){
 	sprintf(buf, "ACTIVE_WEAPON %d", CInput.active_weapon);
     DrawString(0,350,buf,SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
 
+    int TeeState = walk_left;
+
     // Debug tee
     if (CInput.angle >= 180){
-    	
+        TeeState =  walk_left;
     }
     else{
-
+        TeeState =  idle_right;
     }
 
 	NPlayerAppearance test_appearance;
-	test_appearance.skin_id = SKIN_REDBOPP;    
+	test_appearance.skin_id = SKIN_REDBOPP;
 
-    DrawTee(400-16, 300-16, walk_left, test_appearance, -CInput.angle, gun, SDL_MapRGB(Screen->format, 255, 0, 255));
+    DrawTee(400, 300, TeeState, test_appearance, -CInput.angle, gun, SDL_MapRGB(Screen->format, 255, 0, 255));
 
     DrawCursor();
-    
+
 	SDL_Flip(Screen);
 	return m_online;
 }

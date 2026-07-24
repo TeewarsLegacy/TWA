@@ -17,7 +17,7 @@ extern SDL_Surface *TeeTilesetLeft;
 extern SDL_Surface *TeeTilesetRight;
 // Tees tilesets
 extern SDL_Surface *TeeBodiesTileset;
-extern SDL_Surface *TeeLegsTileset; // Now on some time empty
+extern SDL_Surface *TeeLegsTileset;  // This have 3 frames
 extern SDL_Surface *TeeEye;
 // Weapons tileset
 extern SDL_Surface *WeaponsTilesetLeft;
@@ -55,13 +55,6 @@ extern SDL_Surface *Cursor;
 extern SDL_Surface *DecorationsTileset;
 // Mountians
 extern SDL_Surface *Mountians;
-
-enum{ // Tee tileset (TODO: )
-	tee_idle=1,
-	tee_walk1,
-	tee_walk2,
-	tee_jump
-};
 
 enum{ // Weapons tileset (TODO: REMOVE THIS AND START USE WEAPONS NAMES FROM PROTOCOL)
 	gun=1,

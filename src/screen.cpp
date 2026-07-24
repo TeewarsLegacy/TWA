@@ -13,7 +13,7 @@ SDL_Surface *TeeTilesetRight;
 
 // Tees tilesets
 SDL_Surface *TeeBodiesTileset;
-SDL_Surface *TeeLegsTileset; // Now on some time empty
+SDL_Surface *TeeLegsTileset;
 SDL_Surface *TeeEye;
 // Weapons tileset
 SDL_Surface *WeaponsTilesetLeft;
@@ -57,7 +57,7 @@ char TextFromTileset[37] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 /* Load sprites into pointers */
 void LoadSprites(){
 	TeeBodiesTileset = LoadTexture("data/bodies.png");
-	TeeLegsTileset = LoadTexture("data/eye.png");
+	TeeLegsTileset = LoadTexture("data/legs.png");
 	TeeEye = LoadTexture("data/eye.png");
 	WeaponsTilesetLeft = LoadTexture("data/weapons_left.png");
 	WeaponsTilesetRight = LoadTexture("data/weapons_right.png");
@@ -112,7 +112,7 @@ void DrawSurface(SDL_Surface *surface, int x, int y, int color){
 void DrawAnimationSurface(SDL_Surface *surface, int x, int y, int color, int numofframes, int frame, int angle) {
     // Calculating sprite height
     int frame_h = surface->h / numofframes;
-    
+
     SDL_Surface* single_frame = SDL_CreateRGBSurface(
         SDL_SWSURFACE, surface->w, frame_h, surface->format->BitsPerPixel,
         surface->format->Rmask, surface->format->Gmask, surface->format->Bmask, surface->format->Amask
@@ -126,13 +126,13 @@ void DrawAnimationSurface(SDL_Surface *surface, int x, int y, int color, int num
     if (surface->flags & SDL_SRCCOLORKEY) {
         SDL_SetColorKey(single_frame, SDL_SRCCOLORKEY, surface->format->colorkey);
     }
-    
+
     SDL_Rect src;
     src.x = 0;
     src.y = (frame - 1) * frame_h;
     src.w = surface->w;
     src.h = frame_h;
-    
+
     // Copy the single frame from the sheet onto our temp surface
     SDL_BlitSurface(surface, &src, single_frame, NULL);
 
@@ -165,28 +165,55 @@ void DrawAnimationSurface(SDL_Surface *surface, int x, int y, int color, int num
 
 /* Drawing player with color, and animation */
 void DrawTee(int x, int y, int state, NPlayerAppearance appearance, float angle, int weapon_type, int color){
-	/*switch (state){
-		case walk_left:
-			DrawAnimationSurface(TeeTilesetLeft, x, y, color, 4, tee_walk1);
-			break;
-		case walk_right:
-			DrawAnimationSurface(TeeTilesetRight, x, y, color, 4, tee_walk1);
-			break;
+    float Rad = (angle + 90.0f) * M_PI / 180.0f; // Transform degrees to radians
+    // Calculating eyes position
+	int EyesOffsetX = cosf(Rad) * 10.0f;
+	int EyesOffsetY = -sinf(Rad) * 5.0f;
+	int LeftLegOffsetX = 0;
+	int LeftLegOffsetY = 0;
+	int RightLegOffsetX = 0;
+	int RightLegOffsetY = 0;
+
+	switch (state){
 		case idle_left:
-			DrawAnimationSurface(TeeTilesetLeft, x, y, color, 4, tee_idle);
-			break;
 		case idle_right:
-			DrawAnimationSurface(TeeTilesetRight, x, y, color, 4, tee_idle);
+			LeftLegOffsetX = 0;
+			LeftLegOffsetY = 0;
+			RightLegOffsetX = 0;
+			RightLegOffsetY = 0;
 			break;
-		case fall_left:
-			DrawAnimationSurface(TeeTilesetLeft, x, y, color, 4, tee_jump);
+		case walk_left:
+		case walk_right:
+			LeftLegOffsetX = 0;
+			LeftLegOffsetY = abs(sin(SDL_GetTicks() / 200.0f) * 4)-2;
+			RightLegOffsetX = 0;
+			RightLegOffsetY = abs(cos(SDL_GetTicks() / 200.0f) * 4)-2;
 			break;
-		case fall_right:
-			DrawAnimationSurface(TeeTilesetRight, x, y, color, 4, tee_jump);
-			break;
-	}*/
-	DrawAnimationSurface(TeeBodiesTileset, x, y, color, 17, appearance.skin_id + 1);
-	DrawSurface(TeeEye, x + 64, y - 64, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+	}
+    switch (state){
+		case walk_right:
+		case idle_right:
+            DrawAnimationSurface(TeeLegsTileset, x-TeeLegsTileset->w*0.1+LeftLegOffsetX, y+TeeLegsTileset->w+LeftLegOffsetY, SDL_MapRGBA(Screen->format, 255, 255, 255, 255), 3, 1);
+            break;
+		case walk_left:
+		case idle_left:
+            DrawAnimationSurface(TeeLegsTileset, x-TeeLegsTileset->w*0.9+RightLegOffsetX, y+TeeLegsTileset->w+RightLegOffsetY, SDL_MapRGBA(Screen->format, 255, 255, 255, 255), 3, 1);
+            break;
+    }
+	DrawAnimationSurface(TeeBodiesTileset, x-TeeBodiesTileset->w/2, y+TeeBodiesTileset->w/2-4, color, 17, appearance.skin_id + 1);
+	DrawSurface(TeeEye, x + TeeEye->w*0.1 + EyesOffsetX, y-TeeEye->h/1.5 + EyesOffsetY, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+	DrawSurface(TeeEye, x - TeeEye->w*1.1 + EyesOffsetX, y-TeeEye->h/1.5 + EyesOffsetY, SDL_MapRGBA(Screen->format, 255, 255, 255, 255));
+    switch (state){
+		case walk_right:
+		case idle_right:
+            DrawAnimationSurface(TeeLegsTileset, x-TeeLegsTileset->w*0.9+RightLegOffsetX, y+TeeLegsTileset->w+RightLegOffsetY, SDL_MapRGBA(Screen->format, 255, 255, 255, 255), 3, 1);
+            break;
+		case walk_left:
+		case idle_left:
+            DrawAnimationSurface(TeeLegsTileset, x-TeeLegsTileset->w*0.1+LeftLegOffsetX, y+TeeLegsTileset->w+LeftLegOffsetY, SDL_MapRGBA(Screen->format, 255, 255, 255, 255), 3, 1);
+            break;
+    }
+
 	/*if (angle >= 180){
 		DrawAnimationSurface(WeaponsTilesetRight, x, y, SDL_MapRGBA(Screen->format, 255, 255, 255, 255), 4, gun, angle+90);
 	}
