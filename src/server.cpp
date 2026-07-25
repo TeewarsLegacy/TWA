@@ -22,13 +22,14 @@ NetAddr Client;
 NPacket SPacket;
 char buffer[MAX_PACKET_SIZE] = "\0";
 int SSocket;
-unsigned int ServerPort = 80;
+unsigned int ServerPort;
 
 void SendPacket(){
 	NetUDPSend(SSocket, &Client, &SPacket, sizeof(SPacket));
 }
 
 void ServerMain(int Port, char *Map, char *Name){
+
 	// Configuration of server
 	ServerPort = Port;
 	// Creating server
