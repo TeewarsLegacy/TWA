@@ -5,7 +5,7 @@
 #include "network.h"
 #include <SDL.h>
 
-extern void ClientMain();
+extern void ClientMain(bool Localhost);
 extern void ServerMain(int Port, char *Map, char *Name);
 
 NetAddr MasterserverAddr;
@@ -16,6 +16,7 @@ extern "C" int main(int argc, char *argv[])
     MasterserverAddr.port = 6000;
 
 	bool IsSrv = false;
+	bool Localhost = false;
     int Port = 5000;
     char *Map="dm1";
     char *SName="Unnamed server";
@@ -36,12 +37,15 @@ extern "C" int main(int argc, char *argv[])
         else if (strcmp(argv[i], "-n") == 0 && i + 1 < argc) {
             SName = argv[++i];
         }
+        else if (strcmp(argv[i], "-l") == 0) {
+            Localhost = true;
+        }
     }
 
     if (IsSrv) {
         ServerMain(Port, Map, SName);
     } else {
-        ClientMain();
+        ClientMain(Localhost);
     }
 
     return 0;

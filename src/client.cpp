@@ -56,20 +56,30 @@ void LoadPreferences(){
     fclose(file_pointer);
 }
 
-void ClientMain(){
+void ClientMain(bool Localhost){
 	// Initialization of objects
-	Game = new GameCore(); 
+	Game = new GameCore();
 	Menu = new MenuCore();
 
 	// Loading settings
 	LoadPreferences();
 
-	MenuState state=m_titlescreen;
+	MenuState state;
+	// If user selected flag -l we connecting to localserver with port 5000
+	if (Localhost){
+        if (Connected == false){
+            Game->Connect(inet_addr("127.0.0.1"), 5000);
+        }
+        state = m_online;
+	}
+	else{
+        state = m_titlescreen;
+	}
 	// Initialization of SDL
 	if (SDL_Init(SDL_INIT_AUDIO|SDL_INIT_VIDEO) < 0) {
 		fprintf(stderr, "Failed to initializate SDL");
         exit(1);
-	}	
+	}
 	// Initialization of SDL_image
 	int Flags = IMG_INIT_PNG;
 	if ( !( IMG_Init(Flags) & Flags ) ) {

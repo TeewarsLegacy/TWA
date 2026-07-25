@@ -73,9 +73,6 @@ MenuState MenuCore::MainLoop(){
                         switch (TitlescreenSelector){
                             case 0:
                                 Refresh();
-                                //if (Connected == false){
-                                //    Game->Connect(inet_addr("127.0.0.1"), 5000);
-                                //}
                                 return m_serverlist;
                             case 1:
                                 return m_authors;

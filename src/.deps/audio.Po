@@ -1,0 +1,114 @@
+src/audio.o: src/audio.cpp src/audio.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_mixer.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_types.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_stdinc.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_config.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_platform.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/sys/types.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/crtdefs.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/corecrt.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/_mingw.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/_mingw_mac.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/_mingw_secapi.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/vadefs.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/_mingw_off_t.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/stdio.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/corecrt_stdio_config.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/swprintf.inl \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/sec_api/stdio_s.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/c++/16.1.0/stdlib.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/c++/16.1.0/cstdlib \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/c++/16.1.0/x86_64-w64-mingw32/bits/c++config.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/c++/16.1.0/x86_64-w64-mingw32/bits/os_defines.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/c++/16.1.0/x86_64-w64-mingw32/bits/cpu_defines.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/c++/16.1.0/pstl/pstl_config.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/stdlib.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/corecrt_wstdlib.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/limits.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/syslimits.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/limits.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/sec_api/stdlib_s.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/malloc.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/mm_malloc.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/errno.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/c++/16.1.0/bits/std_abs.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stddef.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/stddef.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stdarg.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/stdarg.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/_mingw_stdarg.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/string.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/corecrt_memory.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/sec_api/string_s.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/strings.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/inttypes.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stdint.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/stdint.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/ctype.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/corecrt_wctype.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/begin_code.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/close_code.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_rwops.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_error.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_audio.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_endian.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_mutex.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_thread.h \
+ C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_version.h
+src/audio.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_mixer.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_types.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_stdinc.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_config.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_platform.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/sys/types.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/crtdefs.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/corecrt.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/_mingw.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/_mingw_mac.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/_mingw_secapi.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/vadefs.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/_mingw_off_t.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/stdio.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/corecrt_stdio_config.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/swprintf.inl:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/sec_api/stdio_s.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/c++/16.1.0/stdlib.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/c++/16.1.0/cstdlib:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/c++/16.1.0/x86_64-w64-mingw32/bits/c++config.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/c++/16.1.0/x86_64-w64-mingw32/bits/os_defines.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/c++/16.1.0/x86_64-w64-mingw32/bits/cpu_defines.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/c++/16.1.0/pstl/pstl_config.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/stdlib.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/corecrt_wstdlib.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/limits.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/syslimits.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/limits.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/sec_api/stdlib_s.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/malloc.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/mm_malloc.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/errno.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/c++/16.1.0/bits/std_abs.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stddef.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/stddef.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stdarg.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/stdarg.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/_mingw_stdarg.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/string.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/corecrt_memory.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/sec_api/string_s.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/strings.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/inttypes.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stdint.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/stdint.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/ctype.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/corecrt_wctype.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/begin_code.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/close_code.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_rwops.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_error.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_audio.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_endian.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_mutex.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_thread.h:
+C:/Users/ZaBiDeNtW/scoop/apps/msys2/2026-06-11/ucrt64/include/SDL/SDL_version.h:
