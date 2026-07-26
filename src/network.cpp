@@ -35,6 +35,16 @@ int NetUDPOpen(unsigned short port) // Open socket
 
     bind(sock, (struct sockaddr*)&addr, sizeof(addr));
 
+    if(sock == INVALID_SOCKET)
+    {
+    #ifdef _WIN32
+        printf("socket failed: %d\n", WSAGetLastError());
+    #else
+        perror("socket");
+    #endif
+        return -1;
+    }
+
     return sock;
 }
 

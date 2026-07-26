@@ -29,12 +29,15 @@ void SendPacket(){
 }
 
 void ServerMain(int Port, char *Map, char *Name){
-
+    setbuf(stdout, NULL);
 	// Configuration of server
 	ServerPort = Port;
 	// Creating server
 	NetInit();
 	SSocket = NetUDPOpen(ServerPort);
+	if (SSocket == -1){
+        return;
+	}
 	printf("Server with name '%s' listening on port %d\n", Name ,ServerPort);
 	// Sending info about server for masterserver
 	SInfo.players_count = 0;
@@ -57,4 +60,5 @@ void ServerMain(int Port, char *Map, char *Name){
 		}
 		SDL_Delay(16);
 	}
+	return;
 }
