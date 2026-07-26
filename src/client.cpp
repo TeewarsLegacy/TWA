@@ -64,6 +64,11 @@ void ClientMain(bool Localhost){
 	// Loading settings
 	LoadPreferences();
 
+	// Network initialization
+    NetInit();
+    CSocket = NetUDPOpen(0);
+    SetNONBlock(CSocket);
+
 	MenuState state;
 	// If user selected flag -l we connecting to localserver with port 5000
 	if (Localhost){
@@ -91,10 +96,6 @@ void ClientMain(bool Localhost){
 		fprintf(stderr, "Failed to initializate audio system");
         exit(1);
 	}
-	// Network initialization
-    NetInit();
-    CSocket = NetUDPOpen(0);
-    SetNONBlock(CSocket);
 	// Loading data
 	LoadSprites();
 	LoadSounds();
